@@ -21,9 +21,14 @@ const Navbar = () => {
       <h1>Epic Eats</h1>
       <div>
         {!loginCheck ? (
+          <>
           <button className='btn' type='button'>
             <Link to='/login'>Login</Link>
           </button>
+          <button className='btn' type='button'>
+          <Link to='/signUp'>Sign Up</Link>
+          </button>
+          </>
         ) : (
           <button
             className='btn'
