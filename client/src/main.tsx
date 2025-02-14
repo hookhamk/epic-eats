@@ -8,7 +8,11 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
 import SignUp from './pages/SignUp.tsx';
+import Recipe from './pages/Recipe.tsx';
+import MyCookbook from './pages/MyCookbook.tsx';
+import Search from './pages/Search.tsx';
 
+//add add-recipe route
 const router = createBrowserRouter([
   {
     path: '/',
@@ -24,8 +28,20 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: '/signUp',
+        path: '/signup',
         element: <SignUp />,
+      },
+      {
+        path: '/recipe',
+        element: <Recipe />,
+      },
+      {
+        path: '/mycookbook',
+        element: <MyCookbook />,
+      },
+      {
+        path: '/search',
+        element: <Search />,
       },
     ],
   },
