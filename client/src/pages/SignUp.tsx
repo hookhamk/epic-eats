@@ -33,10 +33,10 @@ const SignUp = () => {
   return (
     <div className='form-container'>
       <form className='form login-form' onSubmit={handleSubmit}>
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
         <div className='form-group'>
-          <label>Username</label>
           <input
+            placeholder='Username'
             className='form-input'
             type='text'
             name='username'
@@ -45,8 +45,8 @@ const SignUp = () => {
           />
         </div>
         <div className='form-group'>
-          <label>Password</label>
           <input
+            placeholder='Password'
             className='form-input'
             type='password'
             name='password'
@@ -56,7 +56,7 @@ const SignUp = () => {
         </div>
         <div className='form-group'>
           <button className='btn btn-primary' type='submit'>
-            Login
+            Sign Up
           </button>
         </div>
       </form>
