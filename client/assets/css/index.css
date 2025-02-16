@@ -29,7 +29,8 @@
   }
 
   navbar {
-    
+    background-color: var(--color-light-brown);
+    color: var(--color-off-white)
   }
   
   button {
