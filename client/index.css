@@ -1,27 +1,43 @@
 :root {
-    --content-height: 500px;
+    --color-honey: #ffc107;
+    --color-off-white: #faf3e0;
+    --color-dark-brown: #3e2723;
+    --color-light-brown: #92400e;
+    --color-orange: #d2691e;
+    --color-tan: #d6b09e;
+    --color-dark-tan: #a4825f;
   }
+
+  @font-face {
+    font-family: 'Anonumous Pro';
+    src: url('https://fonts.googleapis.com/css?family=Anonymous Pro');
+    }
   
   body {
-    font-family: sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Anonymous Pro', 'Courier New', Courier, monospace;
+    color: var(--color-dark-brown);
+    background-color:var(--color-off-white);
     text-align: center;
   }
   
   main {
-    height: var(--content-height);
+    height:var(--content-height);
     display: flex;
     align-items: start;
     justify-content: center;
     padding: 20px;
   }
+
+  navbar {
+    
+  }
   
   button {
     cursor: pointer;
-    background-color: #007bff; 
+    background-color:var(--color-orange); 
   }
   
-  #control-panel-wrapper {
+  #recipe-container {
     height: 100%;
     flex: 0 0 auto;
     display: flex;
