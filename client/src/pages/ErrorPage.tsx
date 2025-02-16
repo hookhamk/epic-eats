@@ -1,4 +1,4 @@
-const ErrorPage = () => {
+const ErrorPage = (_props:any) => {
   return (
     <section>
       <h1>404: Page Not Found</h1>
