@@ -23,7 +23,7 @@ const Navbar = () => {
   const handleSubmit = async (e: FormEvent) => {
     // grabs state passes to navigate. input needs to be state.
     e.preventDefault();
-    navigate("/recipes/"+searchTerm)
+    navigate("/search/"+searchTerm)
     //
   }
 
@@ -40,7 +40,7 @@ const Navbar = () => {
       <img src={sampleLogo}></img>
       <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
-      <button type="submit"></button>
+      <button type="submit">Eat</button>
       </form>
       <div>
         {!loginCheck ? (
@@ -48,7 +48,6 @@ const Navbar = () => {
           <button className='btn' type='button'>
             <Link to='/login'>Login</Link>
           </button>
-
           {/* <button className='btn' type='button'>
           <Link to='/signUp'>Sign Up</Link>
           </button> */}
