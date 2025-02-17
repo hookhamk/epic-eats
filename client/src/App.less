@@ -6,15 +6,47 @@
 @color-tan: #d6b09e;
 @color-dark-tan: #a4825f;
 
-@font-face {
-    font-family: 'Anonumous Pro';
-    src: url('https://fonts.googleapis.com/css?family=Anonymous Pro');
-    }
+// Shared custom Ant Design Less variables for theme injection
+@primary-color: @color-off-white;
+@text-color: @color-dark-brown;
+@border-radius-base: 12px;
+@card-border-color: @color-tan;
 
-@font-face {
-    font-family: 'Poppins';
-    src: url('https://fonts.googleapis.com/css?family=Poppins');
+
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-family-base: 'Poppins', sans-serif;
+@font-family-mono: 'Anonymous Pro', monospace;
+
+//Global Styles
+body {
+    font-family: @font-family-base;
+    background-color: @primary-color;
+    color: @text-color;
+  }
+ 
+//Navbar 
+.custom-navbar {
+    background-color: @color-light-brown; 
+    font-family: @font-family-mono;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+.logo {
+    max-height: 50%;
+}
+  
+.custom-menu {
+    flex: 1;
+    min-width: 0;
+  
+    .ant-menu-item {
+        font-size: 16px;
+      }
     }
+  }
 
 // larger tan container for user content (recipe cards, new recipe form, etc)
 .eats-container {
@@ -41,12 +73,12 @@
   border: 1px solid @card-border-color;
   border-radius: 12px;
 
-  .ant-card-head-title {
+  .ant-meta-title {
     font-size: 18px;
     color: @custom-primary-color;
   }
 
-  .ant-card-body {
+  .ant-meta-description {
     font-size: 14px;
     line-height: 1.6;
   }

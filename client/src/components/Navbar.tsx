@@ -2,7 +2,11 @@ import { useState, useEffect, type FormEvent, type ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
 import auth from '../utils/auth';
-import sampleLogo from "../../assets/images/sample-logo.png"
+import sampleLogo from '../../assets/images/ee_logo.png';
+import { Flex, Typography, Col, Row } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import userIcon from '../../assets/images/ee_logo.png';
+import './navbar.less';
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -35,38 +39,54 @@ const Navbar = () => {
   };
 
   return (
-    <div className='display-flex justify-space-between align-center py-2 px-5 mint-green'>
+    <div className='custom-navbar'>
+      <Flex vertical align="flex-end" justify="space-between" style={{ padding: 32 }}>
+      <img className='logo' src={sampleLogo}></img>
       <h1>Epic Eats</h1>
-      <img src={sampleLogo}></img>
+        <Typography.Title level={4}>
+          RECIPES FOCUSED ON MAKING EVERY COOK FEEL EPIC
+        </Typography.Title>
       <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
       <button type="submit">Eat</button>
       </form>
       <div>
-        {!loginCheck ? (
-          <>
-          <button className='btn' type='button'>
-            <Link to='/login'>Login</Link>
-          </button>
-          {/* <button className='btn' type='button'>
-          <Link to='/signUp'>Sign Up</Link>
-          </button> */}
-          </>
-        ) : (
+        <Row>
+          {!loginCheck ? (
             <>
-              <button
-                className='btn'
-                type='button'
-                onClick={() => {
-                  auth.logout();
-                }}>Logout
-              </button>
-              <button className='btn' type='button'>
-                <Link to='/myEats'>My Eats</Link>
-              </button>
+            <Col flex={1}>
+            <button className='btn' type='button'>
+              <Link to='/login'>Login</Link>
+            </button>
+            </Col>
+            {/* <button className='btn' type='button'>
+            <Link to='/signUp'>Sign Up</Link>
+            </button> */}
             </>
-        )}
+          ) : (
+              <>
+              <Col flex={1}>
+                <button
+                  className='btn'
+                  type='button'
+                  onClick={() => {
+                    auth.logout();
+                  }}>Logout
+                </button>
+                </Col>
+                <Col flex={1}>
+                <img className='logo' src={userIcon}></img>
+                </Col>
+            </>
+          )}
+        </Row>
+        <Row>
+          <button className='btn' type='button'>
+            <Link to='/myEats'>My Eats</Link>
+          </button>
+        </Row>
       </div>
+      </Flex>
     </div>
   );
 };

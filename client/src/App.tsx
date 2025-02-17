@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
-import 'antd/dist/reset.css'; // v5 reset styles
+import 'antd/dist/reset.css'; // Ant Design v5 reset styles
 import './App.less';
 import Footer from './components/Footer'
 import Navbar from './components/Navbar';
@@ -12,11 +12,11 @@ function App() {
     theme={{
       token: {
         //Seed Token for primary styling
-        colorPrimary: '#faf3e0',
+        colorPrimary: '@color-off-white',
         borderRadius: 12,
-        colorText: '#3e2723',
+        colorText: '@color-dark-brown',
         fontSize: 16,
-        colorBgContainer: '#a4825f',
+        colorBgContainer: '@color-dark-tan',
       },
     }}    
     >

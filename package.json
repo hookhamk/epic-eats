@@ -26,9 +26,11 @@
     "wait-on": "^7.2.0"
   },
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@popperjs/core": "^2.11.8",
     "antd": "^5.24.0",
     "less": "^4.2.2",
+    "less-loader": "^12.2.0",
     "vite": "^6.1.0",
     "vite-plugin-style-import": "^2.0.0"
   }
