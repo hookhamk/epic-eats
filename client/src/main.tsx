@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <MyCookbook />,
       },
       {
-        path: '/search/:searchTerm',
+        path: '/search/',
         element: <Search/>
       },
     ],

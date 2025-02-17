@@ -19,8 +19,8 @@ export class CompactRecipe {
 }
 
 class RecipeSearchService {
-    private baseURL?: string;
-    private apiKey?: string;
+    private baseURL?: string = process.env.BASE_URL;
+    private apiKey?: string = process.env.VITE_SPOONS_KEY;
 
     async fetchSearchResults(searchQuery: string) {
         const parsedQuery = searchQuery.replace(/\s/g, '_');

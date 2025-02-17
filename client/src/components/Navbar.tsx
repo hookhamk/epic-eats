@@ -23,7 +23,7 @@ const Navbar = (props:any) => {
   const handleSubmit = async (e: FormEvent) => {
     // grabs state passes to navigate. input needs to be state.
     e.preventDefault();
-    navigate("/search/"+props.searchTerm)
+    navigate("/search/?q="+props.searchTerm)
     //
   }
 
@@ -37,7 +37,7 @@ const Navbar = (props:any) => {
   return (
     <div className='display-flex justify-space-between align-center py-2 px-5 mint-green'>
       <h1>Epic Eats</h1>
-      <img src={sampleLogo}></img>
+      <img src={sampleLogo} height={300}></img>
       <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
       <button type="submit">Eat</button>
