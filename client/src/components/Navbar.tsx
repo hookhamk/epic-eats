@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
 import auth from '../utils/auth';
 import sampleLogo from '../../assets/images/ee_logo.png';
-import { Flex, Typography, Col, Row } from 'antd';
+//import { Flex, Typography, Col, Row } from 'antd';
 //import { SearchOutlined } from '@ant-design/icons';
-import userIcon from '../../assets/images/ee_logo.png';
+import userIcon from '../../assets/images/user-icon.png';
 import './../App.less';
 
 const Navbar = (props:any) => {
@@ -40,32 +40,27 @@ const Navbar = (props:any) => {
 
   return (
     <div className='custom-navbar'>
-      <Flex vertical align="flex-end" justify="space-between" style={{ padding: 32 }}>
       <img className='logo' src={sampleLogo}></img>
       <h1>Epic Eats</h1>
-        <Typography.Title level={4}>
+        <p>
           RECIPES FOCUSED ON MAKING EVERY COOK FEEL EPIC
-        </Typography.Title>
+        </p>
       <form onSubmit={handleSubmit}>
       <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
       <button type="submit">Eat</button>
       </form>
       <div>
-        <Row>
           {!loginCheck ? (
             <>
-            <Col flex={1}>
             <button className='btn' type='button'>
               <Link to='/login'>Login</Link>
             </button>
-            </Col>
             {/* <button className='btn' type='button'>
             <Link to='/signUp'>Sign Up</Link>
             </button> */}
             </>
           ) : (
               <>
-              <Col flex={1}>
                 <button
                   className='btn'
                   type='button'
@@ -73,20 +68,14 @@ const Navbar = (props:any) => {
                     auth.logout();
                   }}>Logout
                 </button>
-                </Col>
-                <Col flex={1}>
                 <img className='logo' src={userIcon}></img>
-                </Col>
+
             </>
           )}
-        </Row>
-        <Row>
           <button className='btn' type='button'>
             <Link to='/myEats'>My Eats</Link>
           </button>
-        </Row>
       </div>
-      </Flex>
     </div>
   );
 };
