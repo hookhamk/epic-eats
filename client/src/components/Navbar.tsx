@@ -8,9 +8,9 @@ import { SearchOutlined } from '@ant-design/icons';
 import userIcon from '../../assets/images/ee_logo.png';
 import './navbar.less';
 
-const Navbar = () => {
+const Navbar = (props:any) => {
   const [loginCheck, setLoginCheck] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  //const [searchTerm, setSearchTerm] = useState("");
   let navigate = useNavigate();
 
   const checkLogin = () => {
@@ -27,15 +27,14 @@ const Navbar = () => {
   const handleSubmit = async (e: FormEvent) => {
     // grabs state passes to navigate. input needs to be state.
     e.preventDefault();
-    navigate("/search/"+searchTerm)
-    //
+    navigate("/search/?q="+props.searchTerm);
   }
 
   const handleChange = ( // updated from login example
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { value } = e.target;
-    return setSearchTerm(value);
+    return props.setSearchTerm(value);
   };
 
   return (
