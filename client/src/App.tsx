@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 function App() {
 
-  const [__searchTerm, __setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
 
   return (
     <div>
@@ -24,7 +24,7 @@ function App() {
       },
     }}    
     >
-      <Navbar />
+      <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <main className='container pt-5'>
         <Outlet />
       </main>
