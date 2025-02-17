@@ -1,0 +1,85 @@
+@color-honey: #ffc107;
+@color-off-white: #faf3e0;
+@color-dark-brown: #3e2723;
+@color-light-brown: #92400e;
+@color-orange: #d2691e;
+@color-tan: #d6b09e;
+@color-dark-tan: #a4825f;
+
+// Shared custom Ant Design Less variables for theme injection
+@primary-color: @color-off-white;
+@text-color: @color-dark-brown;
+@border-radius-base: 12px;
+@card-border-color: @color-tan;
+
+
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@font-family-base: 'Poppins', sans-serif;
+@font-family-mono: 'Anonymous Pro', monospace;
+
+//Global Styles
+body {
+    font-family: @font-family-base;
+    background-color: @primary-color;
+    color: @text-color;
+  }
+ 
+//Navbar 
+.custom-navbar {
+    background-color: @color-light-brown; 
+    font-family: @font-family-mono;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+.logo {
+    max-height: 50%;
+}
+  
+.custom-menu {
+    flex: 1;
+    min-width: 0;
+  
+    .ant-menu-item {
+        font-size: 16px;
+      }
+    }
+  }
+
+// larger tan container for user content (recipe cards, new recipe form, etc)
+.eats-container {
+  padding: 20px;
+  background-color: @color-dark-tan;
+}
+
+.orange-button {
+  background-color: @color-orange;
+  color: @color-dark-brown;
+
+  &:hover {
+    background-color: @color-off-white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px fade(@color-orange, 20%);
+  }
+}
+
+// simple card for returned recipes
+.myeats-card {
+  background-color: @color-off-white;
+  border: 1px solid @card-border-color;
+  border-radius: 12px;
+
+  .ant-meta-title {
+    font-size: 18px;
+    color: @color-dark-brown;
+  }
+
+  .ant-meta-description {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
