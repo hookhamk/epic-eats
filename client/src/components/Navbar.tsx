@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 import auth from '../utils/auth';
 import sampleLogo from "../../assets/images/sample-logo.png"
 
-const Navbar = () => {
+const Navbar = (props:any) => {
   const [loginCheck, setLoginCheck] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  //const [searchTerm, setSearchTerm] = useState("");
   let navigate = useNavigate();
 
   const checkLogin = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
   const handleSubmit = async (e: FormEvent) => {
     // grabs state passes to navigate. input needs to be state.
     e.preventDefault();
-    navigate("/search/"+searchTerm)
+    navigate("/search/"+props.searchTerm)
     //
   }
 
@@ -31,7 +31,7 @@ const Navbar = () => {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { value } = e.target;
-    return setSearchTerm(value);
+    return props.setSearchTerm(value);
   };
 
   return (
