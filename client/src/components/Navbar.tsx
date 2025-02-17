@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 import auth from '../utils/auth';
 import sampleLogo from '../../assets/images/ee_logo.png';
 import { Flex, Typography, Col, Row } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+//import { SearchOutlined } from '@ant-design/icons';
 import userIcon from '../../assets/images/ee_logo.png';
-import './navbar.less';
+import './../App.less';
 
 const Navbar = (props:any) => {
   const [loginCheck, setLoginCheck] = useState(false);
