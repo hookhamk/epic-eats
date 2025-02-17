@@ -23,8 +23,7 @@ const Navbar = (props:any) => {
   const handleSubmit = async (e: FormEvent) => {
     // grabs state passes to navigate. input needs to be state.
     e.preventDefault();
-    navigate("/search/?q="+props.searchTerm)
-    //
+    navigate("/search/?q="+props.searchTerm);
   }
 
   const handleChange = ( // updated from login example
