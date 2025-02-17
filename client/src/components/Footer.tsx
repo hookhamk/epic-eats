@@ -7,9 +7,7 @@ const Footer: React.FC = () => {
         <p>Copyright by Epic Eats 2025</p>
       </div>
       <div className="col-md-6">
-        <button
-          onClick={() => window.open('https://github.com/Zubrungus/epic-eats', '_blank')}
-        >
+        <button onClick={() => window.open('https://github.com/Zubrungus/epic-eats', '_blank')}>
           Github
         </button>
       </div>

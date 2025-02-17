@@ -25,28 +25,39 @@ body {
     background-color: @primary-color;
     color: @text-color;
   }
- 
+
 //Navbar 
 .custom-navbar {
     background-color: @color-light-brown; 
     font-family: @font-family-mono;
+    color: @color-off-white;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+
+.logo-title{
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+  }
 
 .logo {
-    max-height: 50%;
+    height: 75%;
+    width:auto;
+    max-height: 75px;
+    max-width: 75px;
+    object-fit: contain;
 }
-  
-.custom-menu {
-    flex: 1;
-    min-width: 0;
-  
-    .ant-menu-item {
-        font-size: 16px;
-      }
-    }
-  }
+
+.avatar-container{
+    height: 85%;
+    background-color: @color-orange;
+    border-radius: 25px;
+}
+}
 
 // larger tan container for user content (recipe cards, new recipe form, etc)
 .eats-container {

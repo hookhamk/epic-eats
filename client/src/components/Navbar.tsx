@@ -8,7 +8,7 @@ import sampleLogo from '../../assets/images/ee_logo.png';
 import userIcon from '../../assets/images/user-icon.png';
 import './../App.less';
 
-const Navbar = (props:any) => {
+const Navbar = (props: any) => {
   const [loginCheck, setLoginCheck] = useState(false);
   //const [searchTerm, setSearchTerm] = useState("");
   let navigate = useNavigate();
@@ -27,7 +27,7 @@ const Navbar = (props:any) => {
   const handleSubmit = async (e: FormEvent) => {
     // grabs state passes to navigate. input needs to be state.
     e.preventDefault();
-    navigate("/search/?q="+props.searchTerm)
+    navigate("/search/?q=" + props.searchTerm)
     //
   }
 
@@ -40,41 +40,43 @@ const Navbar = (props:any) => {
 
   return (
     <div className='custom-navbar'>
+      <div className='logo-title'>
       <img className='logo' src={sampleLogo}></img>
       <h1>Epic Eats</h1>
-        <p>
-          RECIPES FOCUSED ON MAKING EVERY COOK FEEL EPIC
-        </p>
+      </div>
       <form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
-      <button type="submit">Eat</button>
+        <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
+        <button type="submit">Eat</button>
       </form>
       <div>
+        <div>
           {!loginCheck ? (
             <>
-            <button className='btn' type='button'>
-              <Link to='/login'>Login</Link>
-            </button>
-            {/* <button className='btn' type='button'>
+              <button className='btn' type='button'>
+                <Link to='/login'>Login</Link>
+              </button>
+              {/* <button className='btn' type='button'>
             <Link to='/signUp'>Sign Up</Link>
             </button> */}
             </>
           ) : (
-              <>
-                <button
-                  className='btn'
-                  type='button'
-                  onClick={() => {
-                    auth.logout();
-                  }}>Logout
-                </button>
-                <img className='logo' src={userIcon}></img>
-
+            <>
+              <button
+                className='btn'
+                type='button'
+                onClick={() => {
+                  auth.logout();
+                }}>Logout
+              </button>
             </>
           )}
+          <img className='logo' src={userIcon}></img>
+        </div>
+        <div>
           <button className='btn' type='button'>
             <Link to='/myEats'>My Eats</Link>
           </button>
+        </div>
       </div>
     </div>
   );
