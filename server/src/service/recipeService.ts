@@ -37,6 +37,7 @@ class RecipeSearchService {
 
         return searchArray;
     }
+
 }
 
 export default new RecipeSearchService();
