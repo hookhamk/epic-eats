@@ -27,7 +27,7 @@ const Home = (_props:any) => {
         }
     };
 
-    const fetchUsers = async () => {
+ const fetchUsers = async () => {
         try {
             const data = await retrieveUsers();
             setUsers(data)
@@ -51,10 +51,10 @@ const Home = (_props:any) => {
                         </h1>
                     </div>
                 ) : (
-                    <UserList users={users} />
+                   <UserList users={users} />
                 )}
         </>
     );
-};
+}
 
 export default Home;

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 function App() {
 
-  const [searchTerm, setSearchTerm] = useState('')
+  const [__searchTerm, __setSearchTerm] = useState('')
 
   return (
     <div>
