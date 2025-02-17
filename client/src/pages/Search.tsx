@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ErrorPage from "./ErrorPage";
 import { retrieveSearchResults } from "../api/SearchAPI";
-//import PaginatedList from "../components/PaginatedList";
+import PaginatedList from "../components/PaginatedList";
 
 const params = new URLSearchParams(window.location.search);
 const searchTerm = params.get('q');
@@ -31,6 +31,7 @@ const Search = () => {
     return (
         <div className="search">
             <h2>Search results for {searchTerm}</h2>
+            <PaginatedList items={recipes}/>
         </div>
     );
 }
