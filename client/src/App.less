@@ -1,0 +1,53 @@
+@color-honey: #ffc107;
+@color-off-white: #faf3e0;
+@color-dark-brown: #3e2723;
+@color-light-brown: #92400e;
+@color-orange: #d2691e;
+@color-tan: #d6b09e;
+@color-dark-tan: #a4825f;
+
+@font-face {
+    font-family: 'Anonumous Pro';
+    src: url('https://fonts.googleapis.com/css?family=Anonymous Pro');
+    }
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.googleapis.com/css?family=Poppins');
+    }
+
+// larger tan container for user content (recipe cards, new recipe form, etc)
+.eats-container {
+  padding: 20px;
+  background-color: @color-dark-tan;
+}
+
+.orange-button {
+  background-color: @color-orange;
+  color: @color-dark-brown;
+
+  &:hover {
+    background-color: @color-off-white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px fade(@color-orange, 20%);
+  }
+}
+
+// simple card for returned recipes
+.myeats-card {
+  background-color: @color-off-white;
+  border: 1px solid @card-border-color;
+  border-radius: 12px;
+
+  .ant-card-head-title {
+    font-size: 18px;
+    color: @custom-primary-color;
+  }
+
+  .ant-card-body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
