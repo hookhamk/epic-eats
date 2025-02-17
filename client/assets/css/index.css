@@ -1,23 +1,19 @@
-:root {
-    --color-honey: #ffc107;
-    --color-off-white: #faf3e0;
-    --color-dark-brown: #3e2723;
-    --color-light-brown: #92400e;
-    --color-orange: #d2691e;
-    --color-tan: #d6b09e;
-    --color-dark-tan: #a4825f;
-  }
 
-  @font-face {
-    font-family: 'Anonumous Pro';
-    src: url('https://fonts.googleapis.com/css?family=Anonymous Pro');
-    }
-  
   body {
-    font-family: 'Anonymous Pro', 'Courier New', Courier, monospace;
+    font-family: 'Poppins', 'Courier New', Courier, monospace;
     color: var(--color-dark-brown);
     background-color:var(--color-off-white);
     text-align: center;
+  }
+
+  h1 {
+    font-family: 'Anonymous Pro', 'Courier New', Courier, monospace;
+    font-size: large;
+  }
+
+  h2 {
+    font-family: 'Anonymous Pro', 'Courier New', Courier, monospace;
+    font-size: medium;
   }
   
   main {
@@ -38,12 +34,18 @@
     background-color:var(--color-orange); 
   }
   
-  #recipe-container {
-    height: 100%;
+  .myeats-container {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    border-radius: 12px;
+    background-color: var(--color-tan);
+  }
+
+  .recipe-card .antd-card{
+    border-radius: 12px;
+    background-color: var(--color-off-white);
   }
   
