@@ -103,7 +103,7 @@ const Login = (_props:any) => {
           <button className='btn btn-primary' type='submit'>
             Login
           </button>
-          or <Link to='/signup'>Register Now!</Link>
+          or <Link to='/signup'> Register Now!</Link>
         </div>
       </form>
     </div>
