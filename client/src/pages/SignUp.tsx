@@ -4,7 +4,7 @@ import Auth from '../utils/auth';
 import { signUp } from '../api/signUpAPI';
 import type { UserLogin } from '../interfaces/UserLogin';
 
-const SignUp = () => {
+const SignUp = (_props:any) => {
   const [signUpData, setSignUpData] = useState<UserLogin>({
     username: '',
     password: '',

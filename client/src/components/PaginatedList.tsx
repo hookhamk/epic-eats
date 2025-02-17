@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input } from 'antd';
 
 interface Item {
   id: number;
@@ -12,8 +10,6 @@ interface Item {
 interface Props {
   items: Item[];
 }
-
-type LayoutType = Parameters<typeof Form>[0]['layout'];
 
 const PaginatedList: React.FC<Props> = ({ items }) => {
   const itemsPerPage = 20;
@@ -33,13 +29,6 @@ const PaginatedList: React.FC<Props> = ({ items }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(items.length / itemsPerPage); i++) {
     pageNumbers.push(i);
-
-    //Ant Design Form
-    const [form] = Form.useForm();
-    const [formLayout, setFormLayout] = useState<LayoutType>('horizontal');
-  
-    const onFormLayoutChange = ({ layout }: { layout: LayoutType }) => {
-      setFormLayout(layout);
   }
 
   return (
