@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
 
 import App from './App.tsx';
 
@@ -9,7 +8,7 @@ import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
 import SignUp from './pages/SignUp.tsx';
 import Recipe from './pages/Recipe.tsx';
-import MyCookbook from './pages/MyCookbook.tsx';
+import MyEats from './pages/MyEats.tsx';
 import Search from './pages/Search.tsx';
 
 //add add-recipe route
@@ -32,12 +31,12 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: '/recipe',
+        path: '/recipes/:id/information',
         element: <Recipe />,
       },
       {
-        path: '/mycookbook',
-        element: <MyCookbook />,
+        path: '/myeats',
+        element: <MyEats/>,
       },
       {
         path: '/search/',
