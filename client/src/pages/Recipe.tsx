@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import ErrorPage from "./ErrorPage";
 import { retrieveRecipeDetails } from "../api/RecipeDetailsAPI";
+import ErrorPage from "./ErrorPage";
 import {useParams} from 'react-router-dom';
-// const params = new URLSearchParams(window.location.search);
-// const searchTerm = params.get('q');
 
 interface Recipe {
     image: string,
@@ -18,7 +16,9 @@ interface Ingredients {
 }
 
 const Recipe = (_props:any) => {
+  
     const {id} = useParams();
+    console.log(id)
     const [error, setError] = useState(false);
     const [recipe, setRecipe] = useState<Recipe>({
         image: '',

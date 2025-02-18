@@ -12,9 +12,10 @@ function App() {
 
   return (
     <div>
+
       <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <main className='container pt-5'>
-        <Outlet />
+        <Outlet context={searchTerm} />
       </main>
     <Footer />
      {/* </SearchContext.Provider> */}
