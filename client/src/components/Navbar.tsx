@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
 import auth from '../utils/auth';
 import sampleLogo from '../../assets/images/ee_logo.png';
-//import { Flex, Typography, Col, Row } from 'antd';
-//import { SearchOutlined } from '@ant-design/icons';
 import userIcon from '../../assets/images/user-icon.png';
 import './../App.less';
 
@@ -41,20 +39,22 @@ const Navbar = (props: any) => {
   return (
     <div className='custom-navbar'>
       <div className='logo-title'>
-      <img className='logo' src={sampleLogo}></img>
-      <h1>Epic Eats</h1>
+        <Link to='/'>
+          <img className='logo' src={sampleLogo} alt="Epic Eats Logo" />
+        </Link>
+        <h1>Epic Eats</h1>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
-        <button type="submit">Eat</button>
-      </form>
-      <div>
-        <div>
+      <div className='search'>
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
+          <button type="submit">🔍 Eat</button>
+        </form>
+      </div>
+      <div className='avatar-container'>
+        <div className='top-row'>
           {!loginCheck ? (
             <>
-              <button className='btn' type='button'>
-                <Link to='/login'>Login</Link>
-              </button>
+              <Link to='/login' className='login-btn' >Login</Link>
               {/* <button className='btn' type='button'>
             <Link to='/signUp'>Sign Up</Link>
             </button> */}
@@ -62,7 +62,7 @@ const Navbar = (props: any) => {
           ) : (
             <>
               <button
-                className='btn'
+                className='login-btn'
                 type='button'
                 onClick={() => {
                   auth.logout();
@@ -70,12 +70,10 @@ const Navbar = (props: any) => {
               </button>
             </>
           )}
-          <img className='logo' src={userIcon}></img>
+          <img className='avatar' src={userIcon}></img>
         </div>
-        <div>
-          <button className='btn' type='button'>
-            <Link to='/myEats'>My Eats</Link>
-          </button>
+        <div className='bottom-row'>
+          <Link to='/myEats' className='eats-button' >My Eats</Link>
         </div>
       </div>
     </div>

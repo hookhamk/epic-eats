@@ -11,6 +11,8 @@
 @text-color: @color-dark-brown;
 @border-radius-base: 12px;
 @card-border-color: @color-tan;
+@header-height: 64px;
+@footer-height: 50px;
 
 
 //Fonts
@@ -26,37 +28,171 @@ body {
     color: @text-color;
   }
 
+.layout {
+  min-height: 100vh;
+  display: inline;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 24px;
+}
+
+.footer {
+  button {
+    background-color: @color-dark-tan;
+    border-radius: 45px;
+    padding: 8px;
+    &:hover {
+      background-color: @color-honey;
+    }
+  }
+  height: @footer-height;
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  align-content: space-evenly;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
 //Navbar 
 .custom-navbar {
     background-color: @color-light-brown; 
     font-family: @font-family-mono;
     color: @color-off-white;
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: space-around;
 
+
 .logo-title{
+    h1{
+      margin: 0px;
+    }
     display: flex;
     height: 100%;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     margin: 10px;
-  }
+    gap: 10px;
+  }  
 
 .logo {
-    height: 75%;
+    height: 90%;
     width:auto;
-    max-height: 75px;
-    max-width: 75px;
+    max-height: 100px;
+    max-width: 100px;
     object-fit: contain;
 }
 
+//orange container with login, avater, and saved recipe buttons
 .avatar-container{
+    margin: 8px;
     height: 85%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     background-color: @color-orange;
     border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-family: @font-family-mono;
+    text-decoration: none;
 }
+
+.top-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.login-btn  {
+  background: none;
+  border: none;
+  color: @color-dark-brown;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+  border-radius: @border-radius-base;
+  text-decoration: none;
+  padding: 3px 5px;
+  &:hover {
+    background-color: @color-honey;
+  }
+}
+
+.avatar {
+  max-width: 65px;
+  max-height: 65px;
+  border-radius: 50%;
+}
+
+.bottom-row {
+  text-align: center;
+  width: 100%;
+  padding-top: 1px;
+  padding-bottom: 8px;
+}
+
+.eats-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: @border-radius-base;
+  text-decoration: none;
+  color: @color-dark-brown;
+  padding: 3px 8px;
+  &:hover {
+    background-color: @color-honey;
+  }
+}
+}
+
+//Searchbar
+.search {
+  display: flex;
+  align-items: center;
+
+  input {
+    flex-grow: 1;
+    border: 1px solid @color-dark-brown;
+    background-color: @color-off-white;
+    color: @color-dark-brown;
+    font-size: large;
+    padding: 10px 15px;
+    border-top-left-radius: 85px;
+    border-bottom-left-radius: 85px;
+    outline: none;
+
+    &:focus {
+      border-color: @color-honey;
+    }
+  }
+
+  button {
+    border: none;
+    background-color: @color-honey;
+    color: @color-dark-brown;
+    font-family: @font-family-mono;
+    font-size: large;
+    padding: 10px 20px;
+    border-top-right-radius: 85px;
+    border-bottom-right-radius: 85px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: @color-tan;
+    }
+  }
 }
 
 // larger tan container for user content (recipe cards, new recipe form, etc)
@@ -84,12 +220,12 @@ body {
   border: 1px solid @card-border-color;
   border-radius: 12px;
 
-  .ant-meta-title {
+  .card-title {
     font-size: 18px;
     color: @color-dark-brown;
   }
 
-  .ant-meta-description {
+  .card-description {
     font-size: 14px;
     line-height: 1.6;
   }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Item {
   id: number;
@@ -35,8 +36,10 @@ const PaginatedList: React.FC<Props> = ({ items }) => {
     <div>
       {currentItems.map(item => (
         <div key={item.id}>
+          <Link to={`/recipe/${item.id}/information`}>
             <img src={item.image}></img>
             <p>{item.title}</p>
+          </Link>
         </div>
       ))}
       <div>
