@@ -20,17 +20,25 @@ router.get('/search/*', async (req: Request, res: Response) => {
 
 router.get('/:id/information', async (req: Request, res: Response) =>{
     try{
-
         const fullInformation = await RecipeSearchService.fetchFullInformation(req.params.id);
 
         res.json(fullInformation);
-
     } catch(err){
         console.error(err);
         res.status(500).json(err);
     }
+});
 
-})
+router.get('/random', async (_req: Request, res: Response) =>{
+    try{
+        const randomInformation = await RecipeSearchService.fetchRandomRecipe();
+
+        res.json(randomInformation);
+    } catch(err){
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
 
 
 export { router as recipeRouter };
