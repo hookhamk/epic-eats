@@ -2,8 +2,8 @@ import { useState, useEffect} from "react";
 import ErrorPage from "./ErrorPage";
 import { retrieveRandomRecipe } from "../api/RandomRecipeAPI";
 import { retrieveEditorsRecipe } from "../api/EditorsRecipeAPI";
-import kelly from '../../assets/images/kelly.jpg';
-import gage from '../../assets/images/gage.jpg';
+import kelly from '../../assets/images/kelly.png';
+import gage from '../../assets/images/gage.png';
 import nick from '../../assets/images/nick.png';
 
 interface Recipe {
@@ -63,10 +63,6 @@ const Home = (_props: any) => {
             console.error("Failed to retrieve Editor's Eats", err);
             setError(true);
         }
-    }
-
-    if (error) {
-        return <ErrorPage />;
     }
 
     return (

@@ -206,7 +206,7 @@ body {
   padding: 20px;
   background-color: @color-dark-tan;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 16px;
   border-radius: 25px;
 }
@@ -220,14 +220,18 @@ body {
 }
 
 .recipe-img{
+  height: 100%;
+  max-width: 40%;
+  background-color: @color-off-white;
   border-radius: 25px;
-  display: flex;
-  border-color: @color-off-white; 
-  border-width: 3px;
-
+  padding: 10px;
+  object-fit: contain;
+  
   img {
-    height: auto;
+    max-height: 100%;
+    width: auto;
     border-radius: 25px;
+    border: 10px;
   }
 }
 
