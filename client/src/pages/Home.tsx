@@ -1,10 +1,7 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { retrieveUsers } from "../api/userAPI";
+import { useState, useEffect} from "react";
 import ErrorPage from "./ErrorPage";
-import type { UserData } from "../interfaces/UserData";
 import { retrieveRandomRecipe } from "../api/RandomRecipeAPI";
 import { retrieveEditorsRecipe } from "../api/EditorsRecipeAPI";
-import auth from '../utils/auth';
 import kelly from '../../assets/images/kelly.jpg';
 import gage from '../../assets/images/gage.jpg';
 import nick from '../../assets/images/nick.png';
