@@ -11,8 +11,9 @@
 @text-color: @color-dark-brown;
 @border-radius-base: 12px;
 @card-border-color: @color-tan;
-@header-height: 64px;
-@footer-height: 50px;
+@header-height: 25%;
+@footer-height: 5%;
+@content-height: 80%;
 
 
 //Fonts
@@ -30,12 +31,16 @@ body {
 
 .layout {
   min-height: 100vh;
-  display: inline;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
   flex-grow: 1;
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer {
@@ -197,8 +202,33 @@ body {
 
 // larger tan container for user content (recipe cards, new recipe form, etc)
 .eats-container {
+  max-height: 75vh;
   padding: 20px;
   background-color: @color-dark-tan;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 25px;
+}
+
+.recipe-card{
+  max-height: 65vh;
+  overflow: auto;
+  background-color: @color-off-white;
+  border-radius: 25px;
+  padding: 10px 20px;
+}
+
+.recipe-img{
+  border-radius: 25px;
+  display: flex;
+  border-color: @color-off-white; 
+  border-width: 3px;
+
+  img {
+    height: auto;
+    border-radius: 25px;
+  }
 }
 
 .orange-button {
