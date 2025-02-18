@@ -15,7 +15,7 @@ function App() {
       <Navbar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       </header>
       <main className='content'>
-        <Outlet />
+        <Outlet context={searchTerm} />
       </main>
       <footer>
     <Footer />
