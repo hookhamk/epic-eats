@@ -40,5 +40,15 @@ router.get('/random', async (_req: Request, res: Response) =>{
     }
 });
 
+router.get('/editor', async (_req: Request, res: Response) =>{
+    try{
+
+    } catch(err){
+        console.error(err);
+        res.status(500).json(err);
+    }
+
+});
+
 
 export { router as recipeRouter };
