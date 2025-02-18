@@ -38,9 +38,13 @@ class RecipeSearchService {
         return searchArray;
     }
 
-    /*async fetchFullResults(id: number){
+    async fetchFullInformation(id: string){
 
-    }*/
+        const searchResponse = await fetch(`${this.baseURL}/recipes/${id}/information?includeNutrition=true&apiKey=${this.apiKey}`);
+        const parsedSearchResponse = await searchResponse.json();
+
+        return parsedSearchResponse;
+    }
 }
 
 export default new RecipeSearchService();
