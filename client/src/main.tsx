@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: '/recipes/:id/information',
+        path: '/recipe/:id/information',
         element: <Recipe />,
       },
       {
