@@ -38,6 +38,9 @@ class RecipeSearchService {
         return searchArray;
     }
 
+    /*async fetchFullResults(id: number){
+
+    }*/
 }
 
 export default new RecipeSearchService();
