@@ -22,7 +22,6 @@ interface Ingredients {
 }
 
 const Home = (_props: any) => {
-    const [users, setUsers] = useState<UserData[]>([]);
     const [randomRecipe, setRandomRecipe] = useState<Recipe>({
         image: '',
         title: '',
@@ -36,37 +35,6 @@ const Home = (_props: any) => {
         instructions: ''
     })
     const [error, setError] = useState(false);
-    const [loginCheck, setLoginCheck] = useState(false);
-
-    useEffect(() => {
-        if (loginCheck) {
-            fetchUsers();
-        }
-    }, [loginCheck]);
-
-    useLayoutEffect(() => {
-        checkLogin();
-    }, []);
-
-    const checkLogin = () => {
-        if (auth.loggedIn()) {
-            setLoginCheck(true);
-        }
-    };
-
-    const fetchUsers = async () => {
-        try {
-            const data = await retrieveUsers();
-            setUsers(data)
-        } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
-            setError(true);
-        }
-    }
-
-    if (error) {
-        return <ErrorPage />;
-    }
 
     useEffect(() => {
         fetchRandomRecipe()
@@ -100,8 +68,13 @@ const Home = (_props: any) => {
         }
     }
 
+    if (error) {
+        return <ErrorPage />;
+    }
+
     return (
         <>
+            <h1>Recipes focused on making every cook feel epic</h1>
             <section>
                 <div>
                     <h3>Try this Epic Eat:</h3>
