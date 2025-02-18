@@ -1,7 +1,7 @@
 const retrieveRecipeDetails = async (id: string) => {
     try {
       const response = await fetch(
-        `/recipes/${id}/information`,
+        `/api/recipe/${id}/information`,
       );
       // destructure response.  api call returns object with 1 key (results), whose value is the array of objects(recipes) we are inteerested in.
       const result = await response.json();
