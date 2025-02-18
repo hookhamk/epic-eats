@@ -39,7 +39,7 @@ console.log(items.length)
     <div>
       {currentItems.map(item => (
         <div key={item.id}>
-          <Link to={`/recipes/${item.id}/information`}>
+          <Link to={`/recipe/${item.id}/information`}>
             <img src={item.image}></img>
             <p>{item.title}</p>
           </Link>
