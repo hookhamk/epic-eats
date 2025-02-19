@@ -40,22 +40,18 @@ router.get('/search/*', async (req: Request, res: Response) => {
 });
 
 router.get('/:id/information', async (req: Request, res: Response) =>{
-    try{
-        const recipeId = parseInt(req.params.id);
+  try{
 
-        // Check DB first
-        const dbEats= await Data.findById(recipeId);
-        if (dbEats) {
-            return res.json(dbEats);
-        }
-        const fullInformation = await RecipeSearchService.fetchFullInformation(req.params.id);
+    const fullInformation = await RecipeSearchService.fetchFullInformation(req.params.id);
 
-        return res.json(fullInformation);
-    } catch(err){
-        console.error(err);
-        return res.status(500).json(err);
-    }
-});
+    res.json(fullInformation);
+
+} catch(err){
+    console.error(err);
+    res.status(500).json(err);
+}
+
+})
 
 router.get('/random', async (_req: Request, res: Response) =>{
     try{
@@ -67,6 +63,7 @@ router.get('/random', async (_req: Request, res: Response) =>{
         res.status(500).json(err);
     }
 });
+
 
 router.get('/editor', async (_req: Request, res: Response) =>{
     try{

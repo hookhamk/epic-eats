@@ -22,7 +22,7 @@ function About() {
                     <div  className='team-img'>
                     <h2>Front End Development</h2>
                         <img src={gage}></img>
-                        <p>Gage</p>
+                        <h2>Gage</h2>
                     </div>
                     </div>
             </section>
