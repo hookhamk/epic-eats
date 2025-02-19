@@ -29,12 +29,12 @@ const Login = (_props:any) => {
       console.error('Failed to login', err);
     }
   };
-  
+
   return (
     <div className='form-container'>
-      <form className='form login-form' onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <div className='form-group'>
+        <div>
           <input
             placeholder="Username"
             className='form-input'
@@ -44,9 +44,8 @@ const Login = (_props:any) => {
             onChange={handleChange}
           />
         </div>
-        <div className='form-group'>
+        <div>
           <input
-            className='form-input'
             placeholder="Password"
             type='password'
             name='password'
@@ -54,11 +53,11 @@ const Login = (_props:any) => {
             onChange={handleChange}
           />
         </div>
-        <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>
+        <div>
+          <button type='submit'>
             Login
           </button>
-          or <Link to='/signup'> Register Now!</Link>
+          <p>or <Link to='/signup'> Register Now!</Link></p>
         </div>
       </form>
     </div>

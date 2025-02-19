@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import RecipeAPI from "../api/RecipeAPI";
 import ErrorPage from "./ErrorPage";
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 interface Recipe {
     image: string,
@@ -15,9 +15,9 @@ interface Ingredients {
     original: string;
 }
 
-const Recipe = (_props:any) => {
-  
-    const {id} = useParams();
+const Recipe = (_props: any) => {
+
+    const { id } = useParams();
     console.log(id)
     const [error, setError] = useState(false);
     const [recipe, setRecipe] = useState<Recipe>({
@@ -27,9 +27,9 @@ const Recipe = (_props:any) => {
         instructions: ''
     })
 
-    useEffect (() => {
+    useEffect(() => {
         fetchRecipeDetails()
-    },[])
+    }, [])
 
     const fetchRecipeDetails = async () => {
         try {
@@ -46,16 +46,20 @@ const Recipe = (_props:any) => {
     }
 
     return (<div className="recipe">
-        <div>
-            <h1>{recipe.title}</h1>
-            <img src={recipe.image}></img>
-            <h2>Ingredients</h2>
-            <ul>
-            {recipe.extendedIngredients.map(item => (
-                <li key={item.id}>{item.original}</li>
-            ))}
-            </ul>
-            <p>{recipe.instructions}</p>
+        <div className='eats-container'>
+            <div className='recipe-card'>
+                <h1>{recipe.title}</h1>
+                <h2>Ingredients</h2>
+                <ul>
+                    {recipe.extendedIngredients.map(item => (
+                        <li key={item.id}>{item.original}</li>
+                    ))}
+                </ul>
+                <p>{recipe.instructions}</p>
+            </div>
+            <div className='recipe-img'>
+                <img src={recipe.image}></img>
+            </div>
         </div>
     </div>);
 }

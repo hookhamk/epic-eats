@@ -46,7 +46,7 @@ const Navbar = (props: any) => {
       </div>
       <div className='search'>
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Search for an Epic Eat" onChange={handleChange}></input>
+          <input type="text" placeholder="Search Epic Eats" onChange={handleChange}></input>
           <button type="submit">🔍 Eat</button>
         </form>
       </div>

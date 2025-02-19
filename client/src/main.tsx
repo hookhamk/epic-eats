@@ -11,6 +11,7 @@ import Recipe from './pages/Recipe.tsx';
 import MyEats from './pages/MyEats.tsx';
 import Search from './pages/Search.tsx';
 import NewEat from './pages/NewEat.tsx';
+import About from './pages/About.tsx';
 
 //add add-recipe route
 const router = createBrowserRouter([
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: '/recipes/:id/information',
+        path: '/recipe/:id/information',
         element: <Recipe />,
       },
       {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: '/neweat',
         element: <NewEat />
+      },
+      {
+        path: '/about/',
+        element: <About/>
       },
     ],
   },

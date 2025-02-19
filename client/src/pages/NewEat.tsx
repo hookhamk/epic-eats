@@ -1,36 +1,78 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import RecipeAPI from '../api/RecipeAPI';
 
+interface Recipe {
+    title: string;
+    image_url: string;
+    source_url: string;
+    summary: string;
+    instructions: string;
+    ingredients: Ingredients[];
+}
+
+interface Ingredients {
+    id: number,
+    original: string;
+}
+
 const NewEat = () => {
-  const [recipeData, setRecipeData] = useState({
+  const [recipeData, setRecipeData] = useState<Recipe>({
     title: '',
-    ingredients: '',
+    image_url: '',
+    source_url: '',
+    summary: '',
     instructions: '',
-    imageUrl: '',
+    ingredients: [], 
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index?: number) => {
     const { name, value } = e.target;
-    setRecipeData({
-      ...recipeData,
-      [name]: value,
-    });
+
+    if (name === 'ingredients' && index !== undefined) {
+        const newIngredients = recipeData.ingredients.map((ingredient, i) =>
+            i === index ? { ...ingredient, original: value } : ingredient
+          );
+      setRecipeData({ ...recipeData, ingredients: newIngredients });
+    } else {
+      setRecipeData({ ...recipeData, [name]: value });
+    }
+  };
+
+  const addIngredientField = () => {
+    setRecipeData({ ...recipeData, ingredients: [...recipeData.ingredients, { id: Date.now(), original: '' }] });
+  };
+
+  const removeIngredientField = (index: number) => {
+    const newIngredients = recipeData.ingredients.filter((_, i) => i !== index);
+    setRecipeData({ ...recipeData, ingredients: newIngredients });
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+    setSuccess(null);
+
     try {
       await RecipeAPI.createRecipe(recipeData);
-      alert('Recipe successfully created!');
+      setSuccess('Recipe created successfully!');
       setRecipeData({
         title: '',
-        ingredients: '',
+        image_url: '',
+        source_url: '',
+        summary: '',
         instructions: '',
-        imageUrl: '',
+        ingredients: [],
       });
     } catch (err) {
-      console.error('Failed to create recipe', err);
-      alert('Failed to create recipe');
+      setError('Failed to create recipe. Please try again later.');
+      console.error('Recipe creation error:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -38,6 +80,10 @@ const NewEat = () => {
     <div className='form-container'>
       <form className='form recipe-form' onSubmit={handleSubmit}>
         <h1>Create New Recipe</h1>
+
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
+
         <div className='form-group'>
           <input
             placeholder='Title'
@@ -49,16 +95,39 @@ const NewEat = () => {
             required
           />
         </div>
+
         <div className='form-group'>
-          <textarea
-            placeholder='Ingredients (comma-separated)'
+          <input
+            placeholder='Image URL'
             className='form-input'
-            name='ingredients'
-            value={recipeData.ingredients}
+            type='text'
+            name='image_url'
+            value={recipeData.image_url}
             onChange={handleChange}
-            required
           />
         </div>
+
+        <div className='form-group'>
+          <input
+            placeholder='Source URL (e.g., original recipe link)'
+            className='form-input'
+            type='text'
+            name='source_url'
+            value={recipeData.source_url}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className='form-group'>
+          <textarea
+            placeholder='Summary (Short description of the recipe)'
+            className='form-input'
+            name='summary'
+            value={recipeData.summary}
+            onChange={handleChange}
+          />
+        </div>
+
         <div className='form-group'>
           <textarea
             placeholder='Instructions'
@@ -69,19 +138,30 @@ const NewEat = () => {
             required
           />
         </div>
+
         <div className='form-group'>
-          <input
-            placeholder='Image URL'
-            className='form-input'
-            type='text'
-            name='imageUrl'
-            value={recipeData.imageUrl}
-            onChange={handleChange}
-          />
+          <label>Ingredients:</label>
+          {recipeData.ingredients.map((ingredient, index) => (
+            <div key={ingredient.id} className="ingredient-input">
+              <input
+                type="text"
+                placeholder={`Ingredient ${index + 1}`}
+                className="form-input"
+                name="ingredients"
+                value={ingredient.original}
+                onChange={(e) => handleChange(e, index)}
+              />
+              <button type="button" onClick={() => removeIngredientField(index)}>-</button>
+            </div>
+          ))}
+          <button type="button" onClick={addIngredientField}>
+            + Add Ingredient
+          </button>
         </div>
+
         <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>
-            Save Recipe
+          <button className='btn btn-primary' type='submit' disabled={isSubmitting}>
+            {isSubmitting ? 'Saving...' : 'Save Recipe'}
           </button>
         </div>
       </form>
