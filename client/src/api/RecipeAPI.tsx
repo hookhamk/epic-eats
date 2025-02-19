@@ -1,4 +1,17 @@
-const retrieveRecipeDetails = async (id: string) => {
+import axios from 'axios';
+
+const RecipeAPI = {
+  createRecipe: async (recipeData: {
+    title: string;
+    ingredients: string;
+    instructions: string;
+    imageUrl: string;
+  }) => {
+    const response = await axios.post('/api/saved_recipes', recipeData);
+    return response.data;
+  },
+
+  retrieveRecipeDetails: async (id: string) => {
     try {
       const response = await fetch(
         `/recipes/${id}/information`,
@@ -15,6 +28,7 @@ const retrieveRecipeDetails = async (id: string) => {
       console.log('Error from data retrieval: ', err);
       return Promise.reject('Could not relay search term to server');
     }
+  },
   };
 
-  export {retrieveRecipeDetails};
+  export default RecipeAPI;

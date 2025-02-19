@@ -29,52 +29,7 @@ const Login = (_props:any) => {
       console.error('Failed to login', err);
     }
   };
-
-  // return (
-  //   <div className='form-container'>
-  //     <Form className='form login-form' 
-  //       onSubmit={handleSubmit}
-  //       name="login"
-  //       initialValues={{ remember: true }}
-  //       style={{ maxWidth: 360 }}
-  //     >
-  //       <Form.Item className='form-group'
-  //         rules={[{ required: true, message: 'Please input your Username!' }]}
-  //       >
-  //         <Input
-  //           prefix={<UserOutlined />} 
-  //           placeholder="Username"
-  //           name="username"
-  //           value={loginData.username || ''}
-  //           onChange={handleChange}
-  //         />
-  //       </Form.Item>
-  //       <Form.Item className='form-group'
-  //         rules={[{ required: true, message: 'Please input your Password!' }]}
-  //       >
-  //         <Input
-  //           prefix={<LockOutlined />} type="password" placeholder="Password" name="password"
-  //           value={loginData.password || ''}
-  //           onChange={handleChange}
-  //         />
-  //       </Form.Item>
-  //       <Form.Item className='form-group'>
-  //         <Flex justify="space-between" align="center">
-  //           <Form.Item name="remember" valuePropName="checked" noStyle>
-  //             <Checkbox>Remember me</Checkbox>
-  //           </Form.Item>
-  //             <a href="">Forgot password</a>
-  //           </Flex>
-  //       </Form.Item>
-  //       <Form.Item>
-  //         <Button block type="primary" htmlType="submit">
-  //           Log in
-  //         </Button>
-  //           or <Link to='/signup'>Register Now!</Link>
-  //       </Form.Item>
-  //     </Form>
-  //   </div>
-  // );
+  
   return (
     <div className='form-container'>
       <form className='form login-form' onSubmit={handleSubmit}>

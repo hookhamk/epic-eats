@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { retrieveRecipeDetails } from "../api/RecipeDetailsAPI";
+import RecipeAPI from "../api/RecipeAPI";
 import ErrorPage from "./ErrorPage";
 import {useParams} from 'react-router-dom';
 
@@ -33,7 +33,7 @@ const Recipe = (_props:any) => {
 
     const fetchRecipeDetails = async () => {
         try {
-            const data = await retrieveRecipeDetails(id!)
+            const data = await RecipeAPI.retrieveRecipeDetails(id!)
             setRecipe(data)
         } catch (err) {
             console.error('Failed to retrieve tickets:', err);
