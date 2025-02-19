@@ -41,8 +41,10 @@ const Search = () => {
         <div className="search">
             <div>
             <h2>Search results for "{value}"</h2>
-            <div className='eats-container'> 
+            <div className='eats-container search-results'> 
+                <div className='myeats-card'>
                 <PaginatedList items={recipes} />
+                </div>
             </div>
             </div>
         </div>

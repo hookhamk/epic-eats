@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import ErrorPage from "./ErrorPage";
 import PaginatedList from "../components/PaginatedList";
 import { fetchMyEatsFromDB } from "../api/MyEatsAPI";
 
@@ -27,20 +26,16 @@ const MyEats = () => {
     fetchRecipes();
   }, []);
 
-  if (error) {
-    return <ErrorPage />;
-  }
-
-  if (loading) {
-    return <div>Loading your saved eats...</div>;
-  }
-
   return (
     <div>
       <h2>My Eats - Saved Recipes</h2>
       <button className='orange-button'>Add New Eat</button>
+
       <div className="eats-container">
-        <PaginatedList items={recipes} />
+        {loading && <p>Loading your saved eats...</p>}
+        {error && <p className="error-message">Failed to retrieve saved recipes. Please try again later.</p>}
+        {!loading && !error && recipes.length > 0 && <PaginatedList items={recipes} />}
+        {!loading && !error && recipes.length === 0 && <p>No saved recipes found.</p>}
       </div>
     </div>
   );
