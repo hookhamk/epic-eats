@@ -1,4 +1,5 @@
-import Recipe from './../models/recipe';
+import Recipe from './../models/recipe.js';
+import { Op } from 'sequelize';
 
 class Data {
   async findAll() {
@@ -13,7 +14,7 @@ class Data {
     return await Recipe.findAll({
       where: {
         title: {
-          $iLike: `%${title}%`,
+        [Op.iLike]: `%${title}%`,
         },
       },
     });
@@ -34,7 +35,7 @@ class Data {
         image_url: details.image,
         source_url: details.sourceUrl,
         summary: details.summary,
-        instructions: details.instructions,
+        instructions: details.instructions || 'Oh no! Instructions missing',
         ingredients: ingredientsJson,
       },
     });
@@ -52,7 +53,7 @@ class Data {
           image_url: recipe.image,
           source_url: '',
           summary: '',
-          instructions: recipe.instructions || [],
+          instructions: recipe.instructions || 'Oh no! Instructions missing',
           ingredients: [],
         },
       });

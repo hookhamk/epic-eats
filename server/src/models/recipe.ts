@@ -41,8 +41,8 @@ Recipe.init(
     source_url: DataTypes.STRING,
     summary: DataTypes.TEXT,
     instructions: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     ingredients: {
       type: DataTypes.JSONB,

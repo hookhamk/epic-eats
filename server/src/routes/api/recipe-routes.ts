@@ -53,7 +53,7 @@ router.get('/:id/information', async (req: Request, res: Response) =>{
         return res.json(fullInformation);
     } catch(err){
         console.error(err);
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 });
 
@@ -77,5 +77,16 @@ router.get('/editor', async (_req: Request, res: Response) =>{
         return;
     }
 });
+
+router.get('/myeats', async (_req, res) => {
+    try {
+      const recipes = await Data.findAll(); // Fetch all saved recipes
+      res.json(recipes);
+    } catch (error) {
+      console.error('Failed to fetch my eats:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
 
 export { router as recipeRouter };
