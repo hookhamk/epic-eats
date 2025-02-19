@@ -2,7 +2,7 @@ import type { UserLogin } from '../interfaces/UserLogin';
 
 const signUp = async (userInfo: UserLogin) => {
   try {
-    const response = await fetch('/auth/signUp', { // created new route here server side
+    const response = await fetch('/signUp', { // created new route here server side
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

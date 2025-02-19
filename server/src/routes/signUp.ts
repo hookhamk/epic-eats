@@ -1,22 +1,22 @@
 import { Router, type Request, type Response } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 export const signUp = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
-//   const user = await User.findOne({
-//     where: { username },
-//   });
-//   if (!user) {
-//     return res.status(401).json({ message: 'Authentication failed' });
-//   }
+const user = await User.findOne({
+    where: { username },
+  });
+  if (!user) {
+    return res.status(401).json({ message: 'Authentication failed' });
+  }
 
-//   const passwordIsValid = await bcrypt.compare(password, user.password);
-//   if (!passwordIsValid) {
-//     return res.status(401).json({ message: 'Authentication failed' });
-//   }
+  const passwordIsValid = await bcrypt.compare(password, user.password);
+  if (!passwordIsValid) {
+    return res.status(401).json({ message: 'Authentication failed' });
+  }
 
 try {
     const newUser = await User.create({ username, password });
@@ -34,6 +34,6 @@ try {
 const router = Router();
 
 // POST /login - Login a user
-router.post('/signUp', signUp);
+router.post('/', signUp);
 
 export default router;

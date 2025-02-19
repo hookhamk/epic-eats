@@ -43,6 +43,31 @@ class Data {
     return dbEats;
   }
 
+  async create(details: {
+    id: number;
+    title: string;
+    image_url?: string;
+    source_url?: string;
+    summary?: string;
+    instructions: string;
+    ingredients: { id: number; original: string }[];
+  }) {
+    const recipe = await Recipe.create({
+      id: details.id,
+      title: details.title,
+      image_url: details.image_url || '',
+      source_url: details.source_url || '',
+      summary: details.summary || '',
+      instructions: details.instructions,
+      ingredients: details.ingredients.map((ing) => ({
+        id: ing.id,
+        original: ing.original,
+      })),
+    });
+
+    return recipe;
+  }
+
   async storeRecipesFromAPI(recipes: any[]) {
     for (const recipe of recipes) {
       await Recipe.findOrCreate({

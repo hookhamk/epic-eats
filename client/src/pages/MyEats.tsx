@@ -38,6 +38,7 @@ const MyEats = () => {
   return (
     <div>
       <h2>My Eats - Saved Recipes</h2>
+      <button>Add New Eat</button>
       <div className="eats-container">
         <PaginatedList items={recipes} />
       </div>

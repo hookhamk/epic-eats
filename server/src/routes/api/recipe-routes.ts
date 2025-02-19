@@ -87,6 +87,17 @@ router.get('/myeats', async (_req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+router.post('/api/myeats', async (req, res) => {
+    try {
+      const newRecipe = await Data.create(req.body);
+      res.status(201).json(newRecipe);
+    } catch (error) {
+      console.error('Error creating recipe:', error);
+      res.status(500).json({ message: 'Failed to create recipe' });
+    }
+  });
+  
   
 
 export { router as recipeRouter };
