@@ -12,12 +12,19 @@ function About() {
                     <div className='team-img'> 
                     <h2>Design and Database</h2>
                         <img src={kelly}></img>
-                        <p>Kelly</p>
+                        <h2>Kelly</h2>
+                        <p>Hi Friend!
+                            I love data and design. I have experience in using React, SQL, JS, NPM, and CSS.<br></br>
+                            I am a certified HR Professional with a passion for the Haunted Attraction industry.<br></br>
+                            Additonally, I love dogs and crafting.</p>
                     </div>
                     <div  className='team-img'>
                     <h2>Backend Development</h2>
                         <img src={nick}></img>
-                        <p>Nick</p>
+                        <h2>Nick</h2>
+                        <p>I am a software developer who loves to learn and excels in javascript and typescript.<br></br>
+                        I have two cats and am also learning japanese.<br></br>
+                        </p>
                     </div>
                     <div  className='team-img'>
                     <h2>Front End Development</h2>
