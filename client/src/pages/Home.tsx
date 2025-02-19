@@ -28,7 +28,7 @@ const Home = (_props: any) => {
         extendedIngredients: [],
         instructions: ''
     })
-    const [error, setError] = useState(false);
+    const [_error, setError] = useState(false);
 
     useEffect(() => {
         fetchRandomRecipe()
