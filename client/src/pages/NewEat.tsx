@@ -160,9 +160,10 @@ const NewEat = () => {
         </div>
 
         <div className='form-group'>
-          <button className='btn btn-primary' type='submit' disabled={isSubmitting}>
+          <button className='save-recipe-btn' type='submit' disabled={isSubmitting}>
             {isSubmitting ? 'Saving...' : 'Save Recipe'}
           </button>
+          
         </div>
       </form>
     </div>

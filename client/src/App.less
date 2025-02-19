@@ -337,6 +337,9 @@ body {
   background-color: @color-dark-tan;
   gap: 16px;
   border-radius: 25px;
+  max-height: 65vh;
+  max-width:50%;
+  overflow: auto;
 
   input {
     flex-grow: 1;
@@ -389,4 +392,49 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  label {
+    padding: 10px;
+    font-size: large;
+  }
+
+  button {
+    margin: 10px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  textarea {
+    flex-grow: 1;
+    width: 100%;
+    min-height: 25px;
+    border: 1px solid @color-dark-brown;
+    background-color: @color-off-white;
+    color: @color-dark-brown;
+    font-size: large;
+    margin: 15px;
+    padding: 10px 15px;
+    border-radius: 85px;
+    outline: none;
+  }
 }
+
+.recipe-form{
+  padding: 45px;
+  margin-top: 45px;
+}
+
+.save-recipe-btn{
+  font-size: large;
+  font-weight: bold;
+  background-color: @color-orange;
+  border-radius: 25px;
+  color: @color-dark-brown;
+  font-family: @font-family-mono;
+  margin: 15px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
