@@ -30,56 +30,11 @@ const Login = (_props:any) => {
     }
   };
 
-  // return (
-  //   <div className='form-container'>
-  //     <Form className='form login-form' 
-  //       onSubmit={handleSubmit}
-  //       name="login"
-  //       initialValues={{ remember: true }}
-  //       style={{ maxWidth: 360 }}
-  //     >
-  //       <Form.Item className='form-group'
-  //         rules={[{ required: true, message: 'Please input your Username!' }]}
-  //       >
-  //         <Input
-  //           prefix={<UserOutlined />} 
-  //           placeholder="Username"
-  //           name="username"
-  //           value={loginData.username || ''}
-  //           onChange={handleChange}
-  //         />
-  //       </Form.Item>
-  //       <Form.Item className='form-group'
-  //         rules={[{ required: true, message: 'Please input your Password!' }]}
-  //       >
-  //         <Input
-  //           prefix={<LockOutlined />} type="password" placeholder="Password" name="password"
-  //           value={loginData.password || ''}
-  //           onChange={handleChange}
-  //         />
-  //       </Form.Item>
-  //       <Form.Item className='form-group'>
-  //         <Flex justify="space-between" align="center">
-  //           <Form.Item name="remember" valuePropName="checked" noStyle>
-  //             <Checkbox>Remember me</Checkbox>
-  //           </Form.Item>
-  //             <a href="">Forgot password</a>
-  //           </Flex>
-  //       </Form.Item>
-  //       <Form.Item>
-  //         <Button block type="primary" htmlType="submit">
-  //           Log in
-  //         </Button>
-  //           or <Link to='/signup'>Register Now!</Link>
-  //       </Form.Item>
-  //     </Form>
-  //   </div>
-  // );
   return (
     <div className='form-container'>
-      <form className='form login-form' onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>Login</h1>
-        <div className='form-group'>
+        <div>
           <input
             placeholder="Username"
             className='form-input'
@@ -89,9 +44,8 @@ const Login = (_props:any) => {
             onChange={handleChange}
           />
         </div>
-        <div className='form-group'>
+        <div>
           <input
-            className='form-input'
             placeholder="Password"
             type='password'
             name='password'
@@ -99,11 +53,11 @@ const Login = (_props:any) => {
             onChange={handleChange}
           />
         </div>
-        <div className='form-group'>
-          <button className='btn btn-primary' type='submit'>
+        <div>
+          <button type='submit'>
             Login
           </button>
-          or <Link to='/signup'> Register Now!</Link>
+          <p>or <Link to='/signup'> Register Now!</Link></p>
         </div>
       </form>
     </div>

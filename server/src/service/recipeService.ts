@@ -49,8 +49,6 @@ class RecipeSearchService {
         const randomResponse = await fetch(`${this.baseURL}/recipes/random?includeNutrition=true&apiKey=${this.apiKey}&number=1`)
         const parsedRandom = await randomResponse.json();
 
-
-
         return parsedRandom.recipes[0];
     }
 }

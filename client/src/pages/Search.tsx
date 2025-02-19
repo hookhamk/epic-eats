@@ -4,38 +4,49 @@ import { retrieveSearchResults } from "../api/SearchAPI";
 import PaginatedList from "../components/PaginatedList";
 import { useOutletContext } from "react-router-dom";
 
-
-// const searchTerm = params.get('q');
-
 const Search = () => {
-    const [recipes, setRecipes] = useState([])
+    const [recipes, setRecipes] = useState<any[]>([]);
     const [error, setError] = useState(false);
-    const value:string = useOutletContext();
+    const [loading, setLoading] = useState(true);
+    const value: string = useOutletContext();
 
-    useEffect (() => {
-        fetchSearchResults()
-    },[])
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            setLoading(true);
+            setError(false);
 
-    const fetchSearchResults = async () => {
-        try {
-            const data = await retrieveSearchResults(value as string);
-            setRecipes(data);
-        } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
-            setError(true);
-        }
-    }
+            try {
+                const data = await retrieveSearchResults(value);
+                setRecipes(data);
+            } catch (err) {
+                console.error('Failed to retrieve recipes:', err);
+                setError(true);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchSearchResults();
+    }, [value]);
 
     if (error) {
         return <ErrorPage />;
     }
 
+    if (loading) {
+        return <div>Searching for "{value}"...</div>;
+    }
+
     return (
         <div className="search">
-            <h2>Search results for {value}</h2>
-            <PaginatedList items={recipes}/>
+            <div>
+            <h2>Search results for "{value}"</h2>
+            <div className='eats-container'> 
+                <PaginatedList items={recipes} />
+            </div>
+            </div>
         </div>
     );
-}
+};
 
 export default Search;

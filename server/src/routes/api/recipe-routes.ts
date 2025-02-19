@@ -2,30 +2,58 @@ import express from 'express';
 import type { Request, Response } from 'express';
 import { CompactRecipe } from '../../service/recipeService.js';
 import RecipeSearchService from '../../service/recipeService.js';
+import Data from '../data.js';
 
 const router = express.Router();
 
 //Look at value of q and return array of compact recipes
 router.get('/search/*', async (req: Request, res: Response) => {
     try {
-        console.log(req.query.q)
-        const searchArray: CompactRecipe[] = await RecipeSearchService.fetchSearchResults(req.query.q as string);
+        const query = req.query.q as string;
+        console.log(`Search Query: ${query}`);
+
+        //check database for search result before making api call
+        const dbEats = await Data.findByTitle(query);
+
+        if (dbEats.length >= 20) {
+            const searchArray: CompactRecipe[] = dbEats.map((recipe) => ({
+                id: recipe.id,
+                title: recipe.title,
+                image: recipe.image_url,
+            }));
+            console.log('Returning results from DB')
+            return res.json(searchArray);
+        }
+       //if no or not engough results are found call Spoonacular API
+       console.log('Not enough results in DB. Calling Spoonacular API...');
+        const searchArray: CompactRecipe[] = await RecipeSearchService.fetchSearchResults(query);
         
-        res.json(searchArray);
+        //store results to DB
+        await Data.storeRecipesFromAPI(searchArray);
+        return res.json(searchArray);
+
     } catch (err) {
         console.error(err);
         res.status(500).json(err);
+        return;
     }
 });
 
 router.get('/:id/information', async (req: Request, res: Response) =>{
     try{
+        const recipeId = parseInt(req.params.id);
+
+        // Check DB first
+        const dbEats= await Data.findById(recipeId);
+        if (dbEats) {
+            return res.json(dbEats);
+        }
         const fullInformation = await RecipeSearchService.fetchFullInformation(req.params.id);
 
-        res.json(fullInformation);
+        return res.json(fullInformation);
     } catch(err){
         console.error(err);
-        res.status(500).json(err);
+        return res.status(500).json(err);
     }
 });
 
@@ -46,9 +74,30 @@ router.get('/editor', async (_req: Request, res: Response) =>{
     } catch(err){
         console.error(err);
         res.status(500).json(err);
+        return;
     }
-
 });
 
+router.get('/myeats', async (_req, res) => {
+    try {
+      const recipes = await Data.findAll(); // Fetch all saved recipes
+      res.json(recipes);
+    } catch (error) {
+      console.error('Failed to fetch my eats:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+router.post('/api/myeats', async (req, res) => {
+    try {
+      const newRecipe = await Data.create(req.body);
+      res.status(201).json(newRecipe);
+    } catch (error) {
+      console.error('Error creating recipe:', error);
+      res.status(500).json({ message: 'Failed to create recipe' });
+    }
+  });
+  
+  
 
 export { router as recipeRouter };

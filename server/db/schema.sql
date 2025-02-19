@@ -13,7 +13,7 @@ CREATE TABLE user_eats (
     image_url VARCHAR(500),
     source_url VARCHAR(500),
     summary TEXT,
-    instructions JSONB,
+    instructions TEXT,
     ingredients JSONB,
     is_custom BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -25,7 +25,7 @@ CREATE TABLE spoon_eats (
     image_url VARCHAR(500),
     source_url VARCHAR(500),
     summary TEXT,
-    instructions JSONB,
+    instructions TEXT,
     ingredients JSONB,
     nuterients TEXT,
     crated_at TIMESTAMP default CURRENT_TIMESTAMP

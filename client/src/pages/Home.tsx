@@ -1,10 +1,7 @@
-import { useState, useEffect} from "react";
-import ErrorPage from "./ErrorPage";
+import { useState, useEffect } from "react";
 import { retrieveRandomRecipe } from "../api/RandomRecipeAPI";
 import { retrieveEditorsRecipe } from "../api/EditorsRecipeAPI";
-import kelly from '../../assets/images/kelly.jpg';
-import gage from '../../assets/images/gage.jpg';
-import nick from '../../assets/images/nick.png';
+
 
 interface Recipe {
     image: string,
@@ -65,19 +62,16 @@ const Home = (_props: any) => {
         }
     }
 
-    if (error) {
-        return <ErrorPage />;
-    }
-
     return (
         <>
-            <h1>Recipes focused on making every cook feel epic</h1>
-            <section>
+        <h1>Recipes focused on making every cook feel epic</h1>
+        <section className='eats-container'>
+            <div className='recipe-col'>
+            <section className='recipe-card'>
                 <div>
                     <h3>Try this Epic Eat:</h3>
                     <h1>{randomRecipe.title}</h1>
-                    <button onClick={() => fetchRandomRecipe()}>Get another Epic Eat</button>
-                    <img src={randomRecipe.image}></img>
+                    <img className='recipe-img' src={randomRecipe.image}></img>
                 </div>
                 <div>
                     <h2>Ingredients</h2>
@@ -89,12 +83,11 @@ const Home = (_props: any) => {
                     <p>{randomRecipe.instructions}</p>
                 </div>
             </section>
-
-            <section>
+            <section className='recipe-card'>
                 <div>
                     <h3>Try this Editor's Eats:</h3>
                     <h1>{editorRecipe.title}</h1>
-                    <img src={editorRecipe.image}></img>
+                    <img className='recipe-img' src={editorRecipe.image}></img>
                 </div>
                 <div>
                     <h2>Ingredients</h2>
@@ -106,30 +99,14 @@ const Home = (_props: any) => {
                     <p>{editorRecipe.instructions}</p>
                 </div>
             </section>
-
-            <section>
-                <div>
-                    <h2>Meet our Team!</h2>
-                    <div>
-                    <h2>Design and Database</h2>
-                        <img src={kelly}></img>
-                        <p>Kelly</p>
-                    </div>
-                    <div>
-                    <h2>Backend Development</h2>
-                        <img src={nick}></img>
-                        <p>Nick</p>
-                    </div>
-                    <div>
-                    <h2>Front End Development</h2>
-                        <img src={gage}></img>
-                        <p>Gage</p>
-                    </div>
-                </div>
-                <div>
-                    <h2>Like our content? Subscribe to our Newsletter!</h2>
-                    <button>Newsletter</button>
-                </div>
+            </div>
+            <div className='btn-col'>
+                <button className='meal-button random-btn' onClick={() => fetchRandomRecipe()}>Get another Epic Eat</button>
+                <button className='meal-button' onClick={() => fetchRandomRecipe()}>Breakfast</button>
+                <button className='meal-button' onClick={() => fetchRandomRecipe()}>Lunch</button>
+                <button className='meal-button' onClick={() => fetchRandomRecipe()}>Dinner</button>
+                <button className='meal-button' onClick={() => fetchRandomRecipe()}>Snack</button>
+            </div>
             </section>
         </>
     );
