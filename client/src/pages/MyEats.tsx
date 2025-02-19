@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import PaginatedList from "../components/PaginatedList";
 import { fetchMyEatsFromDB } from "../api/MyEatsAPI";
+import { Link } from 'react-router-dom';
 
 const MyEats = () => {
   const [recipes, setRecipes] = useState<any[]>([]);
@@ -29,8 +30,9 @@ const MyEats = () => {
   return (
     <div>
       <h2>My Eats - Saved Recipes</h2>
-      <button className='orange-button'>Add New Eat</button>
-
+      <Link to='/NewEat'>
+          <button className='orange-button'>Add New Eat</button>
+        </Link>
       <div className="eats-container">
         {loading && <p>Loading your saved eats...</p>}
         {error && <p className="error-message">Failed to retrieve saved recipes. Please try again later.</p>}
