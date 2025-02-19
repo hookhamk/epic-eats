@@ -1,7 +1,7 @@
 import React from 'react';
 import kelly from '../../assets/images/kelly.png';
 import gage from '../../assets/images/gage.png';
-import nick from '../../assets/images/nick.png';
+import nick from '../../assets/images/nick-cowboy.jpg';
 
 function About() {
  
@@ -23,6 +23,11 @@ function About() {
                     <h2>Front End Development</h2>
                         <img src={gage}></img>
                         <h2>Gage</h2>
+                        <p>Hello! I’m a (future) junior developer from hailing from rural Minnesota.
+                            I enjoy working on the front end as well as styling. I have experience in using React, SQL, JS, NPM, and CSS.<br></br>
+                            Fitness is a significant part of my life, and I am a regular gym-goer at Los Campeones. 
+                            The discipline and focus I gain from working out help me tackle challenges in my professional life. 
+                            Additionally, I’m a horror movie enthusiast, and some of my favorites include the Babadook and Hereditary.</p>
                     </div>
                     </div>
             </section>
