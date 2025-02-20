@@ -2,21 +2,21 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../config/connection.js';
 
 // Recipe attributes
-interface RecipeAttributes {
+interface UserEatAttributes {
   id: number;
   title: string;
-  image_url: string;
-  source_url: string;
+  image_url?: string;
+  source_url?: string;
   summary: string;
   instructions: string;
   ingredients: object[];
   created_at?: Date;
 }
 
-interface RecipeCreationAttributes extends Optional<RecipeAttributes, 'created_at'> {}
+interface UserEatCreationAttributes extends Optional<UserEatAttributes, 'created_at'> {}
 
 // Sequelize Model
-class Recipe extends Model<RecipeAttributes, RecipeCreationAttributes> implements RecipeAttributes {
+class UserEats extends Model<UserEatAttributes, UserEatCreationAttributes>  implements UserEatAttributes {
   public id!: number;
   public title!: string;
   public image_url!: string;
@@ -27,7 +27,7 @@ class Recipe extends Model<RecipeAttributes, RecipeCreationAttributes> implement
   public created_at!: Date;
 }
 
-Recipe.init(
+UserEats.init(
   {
     id: {
       type: DataTypes.BIGINT,
@@ -55,10 +55,10 @@ Recipe.init(
   },
   {
     sequelize,
-    tableName: 'spoon_eats',
+    tableName: 'user_eats',
     timestamps: false,
   }
 
 );
 
-export default Recipe;
+export default UserEats;

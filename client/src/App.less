@@ -201,7 +201,9 @@ body {
 // larger tan container for user content (recipe cards, new recipe form, etc)
 .eats-container {
   max-height: 75vh;
-  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
   background-color: @color-dark-tan;
   display: flex;
   align-items: stretch;
@@ -213,6 +215,7 @@ body {
   flex-wrap: wrap;
   justify-content: space-evenly;
   min-width: 100vh;
+  flex-direction: row;
 }
 
 .recipe-col{
@@ -289,20 +292,47 @@ body {
 }
 
 // simple card for returned recipes
+.myeats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  overflow: auto;
+}
+
 .myeats-card {
   background-color: @color-off-white;
   border: 1px solid @card-border-color;
-  border-radius: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+}
 
-  .card-title {
-    font-size: 18px;
-    color: @color-dark-brown;
-  }
+.myeats-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 
-  .card-description {
-    font-size: 14px;
-    line-height: 1.6;
-  }
+.pagination {
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.pagination button {
+  border: none;
+  background-color: @color-honey;
+  color: @color-dark-brown;
+  font-family: @font-family-mono;
+  font-size: large;
+  padding: 10px 20px;
+  border-top-right-radius: 85px;
+  border-bottom-right-radius: 85px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .team-img{

@@ -27,6 +27,8 @@ const Recipe = (_props: any) => {
         instructions: ''
     })
 
+    const [saveMessage, setSaveMessage] = useState<string | null>(null);
+
     useEffect(() => {
         fetchRecipeDetails()
     }, [])
@@ -40,6 +42,29 @@ const Recipe = (_props: any) => {
             setError(true);
         }
     }
+
+  const saveRecipeToDB = async () => {
+    try {
+      const response = await fetch('/api/myeats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: Number(id),
+          title: recipe.title,
+          image_url: recipe.image,
+          instructions: recipe.instructions,
+          ingredients: recipe.extendedIngredients.map((ing) => ing.original),
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to save recipe');
+
+      setSaveMessage('Recipe Saved Successfully!');
+    } catch (err) {
+      console.error('Error saving recipe:', err);
+      setSaveMessage('Failed to save recipe.');
+    }
+  };
 
     if (error) {
         return <ErrorPage />
@@ -56,9 +81,11 @@ const Recipe = (_props: any) => {
                     ))}
                 </ul>
                 <p>{recipe.instructions}</p>
+                <button onClick={saveRecipeToDB}>Save Recipe</button>
+                {saveMessage && <p>{saveMessage}</p>}
             </div>
             <div className='recipe-img'>
-                <img src={recipe.image}></img>
+                <img src={recipe.image} alt={recipe.title}></img>
             </div>
         </div>
     </div>);

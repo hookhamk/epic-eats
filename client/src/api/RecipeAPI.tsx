@@ -9,7 +9,7 @@ const RecipeAPI = {
     instructions: string;
     ingredients: object[];
   }) => {
-    const response = await axios.post('/api/saved_recipes', recipeData);
+    const response = await axios.post('/api/myeats', recipeData);
     return response.data;
   },
 
