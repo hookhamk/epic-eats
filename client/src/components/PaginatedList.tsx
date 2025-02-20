@@ -36,23 +36,27 @@ console.log(items.length)
   console.log(pageNumbers);
 
   return (
-    <div>
-      {currentItems.map(item => (
-        <div className='myeats-card' key={item.id}>
-          <Link to={`/recipe/${item.id}/information`}>
-            <img src={item.image}></img>
-            <p>{item.title}</p>
-          </Link>
-        </div>
-      ))}
-      <div>
-        {pageNumbers.map(number => (
-          <button key={number} onClick={() => handleClick(number)}>
-            {number}
-          </button>
-        ))}
+<div className='eats-container'>
+  <div className='myeats-cards'>
+    {currentItems.map((item) => (
+      <div className='myeats-card' key={item.id}>
+        <Link to={`/recipe/${item.id}/information`}>
+          <img src={item.image} alt={item.title} />
+          <p>{item.title}</p>
+        </Link>
       </div>
-    </div>
+    ))}
+  </div>
+
+  {/* Pagination Buttons */}
+  <div className='pagination'>
+    {pageNumbers.map((number) => (
+      <button key={number} onClick={() => handleClick(number)}>
+        {number}
+      </button>
+    ))}
+  </div>
+</div>
   );
 };
 

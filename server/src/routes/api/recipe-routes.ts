@@ -40,16 +40,16 @@ router.get('/search/*', async (req: Request, res: Response) => {
 });
 
 router.get('/:id/information', async (req: Request, res: Response) =>{
-  try{
+    try{
 
-    const fullInformation = await RecipeSearchService.fetchFullInformation(req.params.id);
+        const fullInformation = await RecipeSearchService.fetchFullInformation(req.params.id);
 
-    res.json(fullInformation);
+        res.json(fullInformation);
 
-} catch(err){
-    console.error(err);
-    res.status(500).json(err);
-}
+    } catch(err){
+        console.error(err);
+        res.status(500).json(err);
+    }
 
 })
 
@@ -141,16 +141,42 @@ router.get('/myeats', async (_req, res) => {
     }
   });
 
-router.post('/api/myeats', async (req, res) => {
+  router.post('/api/myeats', async (req, res) => {
     try {
-      const newRecipe = await Data.create(req.body);
+      const { id, title, image_url, source_url, summary, instructions, ingredients } = req.body;
+  
+      let newRecipe;
+  
+      if (id) {
+        // Saving API recipe (e.g., Spoonacular)
+        newRecipe = await Data.create({
+          id,
+          title,
+          image_url,
+          source_url,
+          summary,
+          instructions,
+          ingredients, 
+        });
+      } else {
+        // Saving User-created recipe (from a form)
+        newRecipe = await Data.createUserEat({
+          id,
+          title,
+          image_url,
+          source_url,
+          summary,
+          instructions,
+          ingredients, 
+        });
+      }
+  
       res.status(201).json(newRecipe);
     } catch (error) {
       console.error('Error creating recipe:', error);
       res.status(500).json({ message: 'Failed to create recipe' });
     }
   });
-  
   
 
 export { router as recipeRouter };

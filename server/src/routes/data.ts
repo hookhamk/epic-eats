@@ -1,5 +1,6 @@
 import Recipe from './../models/recipe.js';
 import { Op } from 'sequelize';
+import UserEats from './../models/userEats.js';
 
 class Data {
   async findAll() {
@@ -66,6 +67,31 @@ class Data {
     });
 
     return recipe;
+  }
+
+  async createUserEat(details: {
+    id: number;
+    title: string;
+    image_url?: string;
+    source_url?: string;
+    summary?: string;
+    instructions: string;
+    ingredients: { id: number; original: string }[];
+  }) {
+    const userEat = await UserEats.create({
+      id: details.id,
+      title: details.title,
+      image_url: details.image_url || '',
+      source_url: details.source_url || '',
+      summary: details.summary || '',
+      instructions: details.instructions,
+      ingredients: details.ingredients.map((ing) => ({
+        id: ing.id,
+        original: ing.original,
+      })), 
+    });
+  
+    return userEat;
   }
 
   async storeRecipesFromAPI(recipes: any[]) {
