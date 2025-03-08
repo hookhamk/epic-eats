@@ -13,10 +13,11 @@ interface UserEatAttributes {
   created_at?: Date;
 }
 
-interface UserEatCreationAttributes extends Optional<UserEatAttributes, 'created_at'> {}
+// Optional `id` and `created_at` when creating a UserEat
+interface UserEatCreationAttributes extends Optional<UserEatAttributes, 'id' | 'created_at'> {}
 
 // Sequelize Model
-class UserEats extends Model<UserEatAttributes, UserEatCreationAttributes>  implements UserEatAttributes {
+class UserEats extends Model<UserEatAttributes, UserEatCreationAttributes> implements UserEatAttributes {
   public id!: number;
   public title!: string;
   public image_url!: string;
@@ -31,15 +32,26 @@ UserEats.init(
   {
     id: {
       type: DataTypes.BIGINT,
+      autoIncrement: true,
       primaryKey: true,
+      allowNull: false, 
     },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    image_url: DataTypes.STRING,
-    source_url: DataTypes.STRING,
-    summary: DataTypes.TEXT,
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    source_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    summary: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     instructions: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -58,7 +70,6 @@ UserEats.init(
     tableName: 'user_eats',
     timestamps: false,
   }
-
 );
 
 export default UserEats;

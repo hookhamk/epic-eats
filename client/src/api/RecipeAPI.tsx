@@ -2,16 +2,28 @@ import axios from 'axios';
 
 const RecipeAPI = {
   createRecipe: async (recipeData: {
+    id?: number;
     title: string;
-    image_url: string;
-    source_url: string;
-    summary: string;
+    image_url?: string;
+    source_url?: string;
+    summary?: string;
     instructions: string;
     ingredients: object[];
   }) => {
-    const response = await axios.post('/api/myeats', recipeData);
+    try {
+      let payload = recipeData;
+      // Remove `id` if it's null, undefined, or irrelevant (e.g., user-created recipe)
+      if (!recipeData.id) {
+        const { id, ...dataWithoutId } = recipeData;
+        payload = dataWithoutId;
+      }
+
+    const response = await axios.post('/api/recipe/neweat', recipeData);
     return response.data;
-  },
+  } catch (error) {
+    console.error('Error creating recipe:', error);
+    throw error;
+  }},
 
   retrieveRecipeDetails: async (id: string) => {
     try {

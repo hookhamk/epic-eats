@@ -23,9 +23,8 @@ class Data {
 
   async createOrUpdate(details: any) {
     const ingredientsJson = details.extendedIngredients.map((ing: any) => ({
-      name: ing.name,
-      amount: ing.amount,
-      unit: ing.unit,
+      id: ing.id,
+      original: ing.original,
     }));
 
     const [dbEats] = await Recipe.findOrCreate({
@@ -70,7 +69,7 @@ class Data {
   }
 
   async createUserEat(details: {
-    id: number;
+    id?: number;
     title: string;
     image_url?: string;
     source_url?: string;
@@ -79,7 +78,6 @@ class Data {
     ingredients: { id: number; original: string }[];
   }) {
     const userEat = await UserEats.create({
-      id: details.id,
       title: details.title,
       image_url: details.image_url || '',
       source_url: details.source_url || '',

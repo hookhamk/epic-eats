@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { CompactRecipe } from '../../service/recipeService.js';
+import { CompactRecipe,  } from '../../service/recipeService.js';
 import RecipeSearchService from '../../service/recipeService.js';
 import Data from '../data.js';
 
@@ -62,6 +62,42 @@ router.get('/random', async (_req: Request, res: Response) =>{
         console.error(err);
         res.status(500).json(err);
     }
+});
+
+router.post('/neweat', async (req, res) => {
+  try {
+    const { id, title, image_url, source_url, summary, instructions, ingredients } = req.body;
+
+    let newRecipe;
+
+    if (id) {
+      // Saving API recipe (e.g., Spoonacular)
+      newRecipe = await Data.create({
+        id,
+        title,
+        image_url,
+        source_url,
+        summary,
+        instructions,
+        ingredients,
+      });
+    } else {
+      // Saving User-created recipe (form) - omit id
+      newRecipe = await Data.createUserEat({
+        title,
+        image_url,
+        source_url,
+        summary,
+        instructions,
+        ingredients,
+      });
+    }
+
+    res.status(201).json(newRecipe);
+  } catch (error) {
+    console.error('Error creating recipe:', error);
+    res.status(500).json({ message: 'Failed to create recipe' });
+  }
 });
 
 
@@ -134,49 +170,18 @@ router.get('/editor', async (_req: Request, res: Response) =>{
 router.get('/myeats', async (_req, res) => {
     try {
       const recipes = await Data.findAll(); // Fetch all saved recipes
-      res.json(recipes);
+      if (recipes.length = 0) {
+        res.status(404).json({ message: 'No recipes found' });
+      } else {
+        res.json(recipes);
+      }
     } catch (error) {
       console.error('Failed to fetch my eats:', error);
       res.status(500).json({ error: 'Internal server error' });
     }
   });
 
-  router.post('/api/myeats', async (req, res) => {
-    try {
-      const { id, title, image_url, source_url, summary, instructions, ingredients } = req.body;
-  
-      let newRecipe;
-  
-      if (id) {
-        // Saving API recipe (e.g., Spoonacular)
-        newRecipe = await Data.create({
-          id,
-          title,
-          image_url,
-          source_url,
-          summary,
-          instructions,
-          ingredients, 
-        });
-      } else {
-        // Saving User-created recipe (from a form)
-        newRecipe = await Data.createUserEat({
-          id,
-          title,
-          image_url,
-          source_url,
-          summary,
-          instructions,
-          ingredients, 
-        });
-      }
-  
-      res.status(201).json(newRecipe);
-    } catch (error) {
-      console.error('Error creating recipe:', error);
-      res.status(500).json({ message: 'Failed to create recipe' });
-    }
-  });
-  
+
+
 
 export { router as recipeRouter };
