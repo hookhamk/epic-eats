@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { retrieveRecipeDetails } from "../api/RecipeDetailsAPI";
-import ErrorPage from "./ErrorPage";
 import { useParams } from 'react-router-dom';
+import { useSaveRecipeToDB } from '../api/MyEatsAPI';
 
 interface Recipe {
     image: string,
@@ -16,10 +16,10 @@ interface Ingredients {
 }
 
 const Recipe = (_props: any) => {
-
+    const { saveRecipeToDB, saveMessage } = useSaveRecipeToDB();
     const { id } = useParams();
     console.log(id)
-    const [error, setError] = useState(false);
+    const [_error, setError] = useState(false);
     const [recipe, setRecipe] = useState<Recipe>({
         image: '',
         title: '',
@@ -27,49 +27,24 @@ const Recipe = (_props: any) => {
         instructions: ''
     })
 
-    const [saveMessage, setSaveMessage] = useState<string | null>(null);
-
     useEffect(() => {
         fetchRecipeDetails()
     }, [])
 
     const fetchRecipeDetails = async () => {
         try {
-            const data = await retrieveRecipeDetails(id!)
-            setRecipe(data)
+            const data = await retrieveRecipeDetails(id!);
+            setRecipe(data);
         } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
+            console.error('Failed to retrieve recipe:', err);
             setError(true);
         }
+    };
+
+    const handleSaveRecipe = async () => {
+        const data = await retrieveRecipeDetails(id!);
+        await saveRecipeToDB(data);
     }
-
-  const saveRecipeToDB = async () => {
-    try {
-      const response = await fetch('/api/myeats', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: Number(id),
-          title: recipe.title,
-          image_url: recipe.image,
-          instructions: recipe.instructions,
-          ingredients: recipe.extendedIngredients.map((ing) => ing.original),
-        }),
-      });
-
-      if (!response.ok) throw new Error('Failed to save recipe');
-
-      setSaveMessage('Recipe Saved Successfully!');
-    } catch (err) {
-      console.error('Error saving recipe:', err);
-      setSaveMessage('Failed to save recipe.');
-    }
-  };
-
-    if (error) {
-        return <ErrorPage />
-    }
-
     return (<div className="recipe">
         <div className='eats-container'>
             <div className='recipe-card'>
@@ -81,14 +56,16 @@ const Recipe = (_props: any) => {
                     ))}
                 </ul>
                 <p>{recipe.instructions}</p>
-                <button onClick={saveRecipeToDB}>Save Recipe</button>
+                <div className='recipe-col'>
+                <button onClick={handleSaveRecipe} className='random-btn'>Save Recipe</button>
                 {saveMessage && <p>{saveMessage}</p>}
+                </div>
             </div>
             <div className='recipe-img'>
                 <img src={recipe.image} alt={recipe.title}></img>
             </div>
         </div>
     </div>);
-}
+};
 
 export default Recipe;
