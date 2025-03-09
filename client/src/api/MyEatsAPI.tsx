@@ -1,7 +1,6 @@
 import { RecipeData } from '../interfaces/RecipeData';
 import { useState, useEffect } from "react";
 
-
   const fetchMyEatsFromDB = async () => {
     try {
       const response = await fetch(`/api/recipe/myeats`);
