@@ -18,7 +18,7 @@ const RecipeAPI = {
         payload = dataWithoutId;
       }
 
-    const response = await axios.post('/api/recipe/neweat', recipeData);
+    const response = await axios.post('/api/recipe/neweat', payload);
     return response.data;
   } catch (error) {
     console.error('Error creating recipe:', error);
