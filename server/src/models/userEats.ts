@@ -4,6 +4,8 @@ import sequelize from '../config/connection.js';
 // Recipe attributes
 interface UserEatAttributes {
   id: number;
+  user_id: number;
+  spoonacular_id: number;
   title: string;
   image_url?: string;
   source_url?: string;
@@ -16,9 +18,11 @@ interface UserEatAttributes {
 // Optional `id` and `created_at` when creating a UserEat
 interface UserEatCreationAttributes extends Optional<UserEatAttributes, 'id' | 'created_at'> {}
 
-// Sequelize Model
-class UserEats extends Model<UserEatAttributes, UserEatCreationAttributes> implements UserEatAttributes {
+// Sequelize Model for UserEats
+export class UserEats extends Model<UserEatAttributes, UserEatCreationAttributes> {
   public id!: number;
+  public user_id!: number;
+  public spoonacular_id!: number;
   public title!: string;
   public image_url!: string;
   public source_url!: string;
@@ -34,7 +38,15 @@ UserEats.init(
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey: true,
-      allowNull: false, 
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+    },
+    spoonacular_id: {
+      type: DataTypes.BIGINT,
+      allowNull: true,
     },
     title: {
       type: DataTypes.STRING,
@@ -71,5 +83,12 @@ UserEats.init(
     timestamps: false,
   }
 );
+
+// Function to define associations AFTER both models are imported
+export const associateUserEats = async () => {
+  const { User } = await import('./user.js'); 
+
+  UserEats.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+};
 
 export default UserEats;
