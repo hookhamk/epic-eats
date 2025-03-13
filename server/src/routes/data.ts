@@ -49,7 +49,7 @@ class Data {
         title: details.title,
         summary: details.summary,
         instructions: details.instructions || 'Oh no! Instructions missing',
-        ingredients: details.extendedIngredients.map((ing: any) => ({
+        ingredients: details.ingredients.map((ing: any) => ({
           id: ing.id,
           original: ing.original,
         })), // Ensure correct structure for JSONB
