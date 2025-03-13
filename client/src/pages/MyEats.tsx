@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PaginatedList from "../components/PaginatedList";
 import { fetchMyEatsFromDB } from "../api/MyEatsAPI";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import auth from '../utils/auth';
 
 const MyEats = () => {
@@ -13,6 +13,8 @@ const MyEats = () => {
   if (!userId) {
     window.location.replace('/login');
   }
+
+  const { id } = useParams(); // Extract the id from URL
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -37,7 +39,7 @@ const MyEats = () => {
   return (
     <div>
       <h2>My Eats - Saved Recipes</h2>
-      <Link to='/NewEat'>
+      <Link to={`/${id}/NewEat`}>
         <button className='save-recipe-btn'>Add New Eat</button>
       </Link>
       <div className="eats-container">

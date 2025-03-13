@@ -1,4 +1,3 @@
-import axios from 'axios';
 import auth from '../utils/auth';
 
 const RecipeAPI = {
@@ -12,20 +11,25 @@ const RecipeAPI = {
     extendedIngredients: object[];
   }) => {
     try {
-      let payload = recipeData;
-      // Remove `id` if it's null, undefined, or irrelevant (e.g., user-created recipe)
-      if (!recipeData.id) {
-        const { id, ...dataWithoutId } = recipeData;
-        payload = dataWithoutId;
-      }
     const userId = auth.getToken();
-    const response = await axios.post(`/api/recipe/${userId}/neweat`, payload);
-    return response.data;
-  } catch (error) {
-    console.error('Error creating recipe:', error);
-    throw error;
-  }},
+    const response = await fetch(`/api/recipes/${userId}/neweat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+      },
+      body: JSON.stringify(recipeData),
+    });
 
+    if (!response.ok) {
+      throw new Error('Failed to save recipe');
+    }}
+    catch (err) {
+      console.error('Error from data retrieval: ', err);
+      return Promise.reject('Could not relay search term to server');
+    }
+  },
+  
   retrieveRecipeDetails: async (id: string) => {
     try {
       const response = await fetch(
