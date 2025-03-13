@@ -3,6 +3,8 @@ import type { Request, Response } from 'express';
 import { CompactRecipe,  } from '../../service/recipeService.js';
 import RecipeSearchService from '../../service/recipeService.js';
 import Data from '../data.js';
+import { User } from '../../models/index.js';
+import { authenticateToken } from '../../middleware/auth.js';
 
 const router = express.Router();
 
@@ -64,18 +66,40 @@ router.get('/random', async (_req: Request, res: Response) =>{
     }
 });
 
-router.post('/neweat', async (req, res) => {
-  try {
-    const newRecipe = req.body;
+// POST /users/:id/myeats - Save a new recipe
+router.post('/:id/neweat', authenticateToken, async (req: Request, res: Response) => {
+  console.log('Received User:', req.user); 
+  if (!req.user) {
+    res.status(401).json({ message: 'User not authenticated' });  // Ensure user is authenticated
+    return;
+  }
+  const { userId } = req.params;
+  const newRecipe = req.body;
     console.log('Saving new recipe:', newRecipe);
 
-    // Save the recipe
-    const savedRecipe = await Data.saveRecipe(newRecipe);
+  try {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    // Check if the recipe already exists for the user
+    const existingEat = await Data.findOne(user.id, newRecipe.id);
+
+    console.log(existingEat, user.id, newRecipe.id);
+
+    if (existingEat) {
+      res.status(400).json({ message: 'Recipe already added to My Eats' });
+      return;
+    }
+
+    // ✅ Save the recipe with userId
+    const savedRecipe = await Data.saveRecipe({ ...newRecipe, userId: user.id });
     res.status(201).json(savedRecipe);
 
-  } catch (err) {
-    console.error('Error saving recipe:', err);
-    res.status(500).json({ message: 'Internal Server Error' });
+  } catch (error) {
+    res.status(500).json({ message: (error as Error).message });
   }
 });
 
@@ -145,9 +169,9 @@ router.get('/editor', async (_req: Request, res: Response) =>{
     }
 });
 
-router.get('/myeats', async (req, res) => {
+router.get('/:id/myeats', authenticateToken, async (req, res) => {
   try {
-    const userId = req.query.userId as string; // Assuming userId is passed as a query parameter
+    const userId = req.query.userId as string; 
     console.log(`Fetching saved recipes for user: ${userId}`);
 
     // Fetch the saved recipes from the database

@@ -2,9 +2,10 @@ import { RecipeData } from '../interfaces/RecipeData';
 import { useState, useEffect } from "react";
 import auth from '../utils/auth';
 
-  const fetchMyEatsFromDB = async () => {
+  const fetchMyEatsFromDB = async (userId: number) => {
+
     try {
-      const response = await fetch('/api/recipe/myeats', {
+      const response = await fetch(`/api/recipe/${userId}/myeats`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +31,8 @@ import auth from '../utils/auth';
     // Fetch recipes on mount and determine next available ID
     useEffect(() => {
       const getNextId = async () => {
-        const savedRecipes = await fetchMyEatsFromDB();
+        const userId = localStorage.getItem('userId'); 
+        const savedRecipes = await fetchMyEatsFromDB(Number(userId));
         const maxId = savedRecipes.reduce((max: any, recipe: any) => Math.max(max, recipe.id), 0);
         setNextId(maxId + 1);
       };
@@ -53,7 +55,7 @@ import auth from '../utils/auth';
       ? body.extendedIngredients.map((ing) => ing.original)
       : [];
 
-    const response = await fetch("/api/recipe/neweat", {
+    const response = await fetch(`/api/recipe/${token}/neweat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

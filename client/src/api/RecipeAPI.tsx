@@ -1,4 +1,5 @@
 import axios from 'axios';
+import auth from '../utils/auth';
 
 const RecipeAPI = {
   createRecipe: async (recipeData: {
@@ -17,8 +18,8 @@ const RecipeAPI = {
         const { id, ...dataWithoutId } = recipeData;
         payload = dataWithoutId;
       }
-
-    const response = await axios.post('/api/recipe/neweat', payload);
+    const userId = auth.getToken();
+    const response = await axios.post(`/api/recipe/${userId}/neweat`, payload);
     return response.data;
   } catch (error) {
     console.error('Error creating recipe:', error);
