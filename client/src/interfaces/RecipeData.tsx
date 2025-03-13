@@ -5,7 +5,7 @@ export interface RecipeData {
     source_url: string |null;
     summary: string |null;
     instructions: string |null;
-    ingredients: Ingredients[];
+    extendedIngredients: Ingredients[];
   }
 
   interface Ingredients {
