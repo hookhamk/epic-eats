@@ -1,9 +1,10 @@
 import { RecipeData } from '../interfaces/RecipeData';
 import { useState, useEffect } from "react";
+import auth from '../utils/auth';
 
   const fetchMyEatsFromDB = async () => {
     try {
-      const response = await fetch('/api/recipes/myeats', {
+      const response = await fetch('/api/recipe/myeats', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -38,29 +39,50 @@ import { useState, useEffect } from "react";
     }, []);
 
     const saveRecipeToDB = async (body: RecipeData) => {
-     try {
-        const response = await fetch('/api/recipe/neweat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: nextId,
-            title: body.title,
-            image_url: body.image_url,
-            source_url: body.source_url || '',
-            summary: body.summary || '',
-            instructions: body.instructions,
-            extendedIngredients: body.extendedIngredients.map((ing) => ing.original),
-          }),
-        });
+      try {
+            // Check if the user is logged in before proceeding
+    if (!auth.loggedIn()) {
+      setSaveMessage("Authentication required to save recipes.");
+      return;
+    }
 
-        if (!response.ok) throw new Error('Failed to save recipe');
+    const token = auth.getToken(); // Ensure token is retrieved correctly
 
-        setSaveMessage('Recipe Saved Successfully!');
-        setNextId((prevId) => prevId + 1);
-      } catch (err) {
-        setSaveMessage('Error saving recipe.');
-      }
-    };
+    // Ensure ingredients exist before mapping
+    const ingredients = Array.isArray(body.extendedIngredients)
+      ? body.extendedIngredients.map((ing) => ing.original)
+      : [];
+
+    const response = await fetch("/api/recipe/neweat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // Ensuring authentication
+      },
+      body: JSON.stringify({
+        id: nextId,
+        title: body.title,
+        image_url: body.image_url || "",
+        source_url: body.source_url || "",
+        summary: body.summary || "",
+        instructions: body.instructions || "",
+        extendedIngredients: ingredients,
+      }),
+    });
+
+    const result = await response.json(); // Extract response JSON for debugging
+
+    if (!response.ok) {
+      throw new Error(result.error || "Failed to save recipe");
+    }
+
+    setSaveMessage("Recipe Saved Successfully!");
+    setNextId((prevId) => prevId + 1);
+  } catch (err: any) {
+    console.error("Error saving recipe:", err.message); // Log for debugging
+    setSaveMessage("Error saving recipe.");
+  }
+};
       return { saveMessage, saveRecipeToDB };
     };
 
