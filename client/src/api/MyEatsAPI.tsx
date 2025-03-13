@@ -3,18 +3,24 @@ import { useState, useEffect } from "react";
 
   const fetchMyEatsFromDB = async () => {
     try {
-      const response = await fetch(`/api/recipe/myeats`);
-      const result = await response.json();
-
+      const response = await fetch('/api/recipes/myeats', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+        },
+      });
+    
       if (!response.ok) {
         throw new Error('Failed to fetch saved recipes');
       }
-      return result;
+    
+      return response.json();
     } catch (err) {
-      console.log('Error from data retrieval: ', err);
-      return Promise.reject('Could not relay request to server');
-    }
-  };
+    console.error('Failed to fetch saved recipes:', err);
+    return [];
+  }
+};
 
   const useSaveRecipeToDB = () => {
     const [saveMessage, setSaveMessage] = useState<string | null>(null);
