@@ -34,17 +34,17 @@ class Data {
     });
   }
 
-  async saveRecipe(details: any, user_id: number) {
+  async saveRecipe(details: any) {
     const recipe = await this.createOrUpdate(details);
 
     // Associate the recipe with the user in UserEats
     await UserEats.findOrCreate({
       where: {
-        user_id,
+        user_id: details.user_id,
         spoonacular_id: details.spoonacular_id || 0, // Ensure correct lookup
       },
       defaults: {
-        user_id,
+        user_id: details.user_id,
         spoonacular_id: details.spoonacular_id || 0,
         title: details.title,
         summary: details.summary,
