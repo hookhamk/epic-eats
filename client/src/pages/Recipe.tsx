@@ -4,9 +4,13 @@ import { useParams } from 'react-router-dom';
 import { useSaveRecipeToDB } from '../api/MyEatsAPI';
 
 interface Recipe {
+    id: number,
     image: string,
+    image_url: string,
+    source_url: string,
+    summary: string,
     title: string,
-    extendedIngredients: Ingredients[],
+    ingredients: Ingredients[],
     instructions: string;
 }
 
@@ -21,9 +25,13 @@ const Recipe = (_props: any) => {
     console.log(id)
     const [_error, setError] = useState(false);
     const [recipe, setRecipe] = useState<Recipe>({
+        id: 0,
         image: '',
+        image_url: '',
+        source_url: '',
+        summary: '',
         title: '',
-        extendedIngredients: [],
+        ingredients: [],
         instructions: ''
     })
 
@@ -42,16 +50,21 @@ const Recipe = (_props: any) => {
     };
 
     const handleSaveRecipe = async () => {
-        const data = await retrieveRecipeDetails(id!);
-        await saveRecipeToDB(data);
-    }
+        try {
+            await saveRecipeToDB(recipe);
+            console.log('Recipe saved successfully');
+        } catch (err) {
+            console.error('Failed to save recipe:', err);
+        }
+    };
+
     return (<div className="recipe">
         <div className='eats-container'>
             <div className='recipe-card'>
                 <h1>{recipe.title}</h1>
                 <h2>Ingredients</h2>
                 <ul>
-                    {recipe.extendedIngredients.map(item => (
+                    {recipe.ingredients.map(item => (
                         <li key={item.id}>{item.original}</li>
                     ))}
                 </ul>

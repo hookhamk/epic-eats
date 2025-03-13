@@ -6,7 +6,6 @@ export interface RecipeData {
     summary: string |null;
     instructions: string |null;
     ingredients: Ingredients[];
-    nuterients: string | null;
   }
 
   interface Ingredients {

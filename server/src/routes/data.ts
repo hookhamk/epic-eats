@@ -18,6 +18,7 @@ class Data {
         [Op.eq]: user_id,
         },
       },
+      include: [Recipe],
     });
 
     return savedRecipes;
