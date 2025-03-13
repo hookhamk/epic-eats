@@ -10,7 +10,7 @@ interface Recipe {
     source_url: string,
     summary: string,
     title: string,
-    ingredients: Ingredients[],
+    extendedIngredients: Ingredients[],
     instructions: string;
 }
 
@@ -31,7 +31,7 @@ const Recipe = (_props: any) => {
         source_url: '',
         summary: '',
         title: '',
-        ingredients: [],
+        extendedIngredients: [],
         instructions: ''
     })
 
@@ -64,7 +64,7 @@ const Recipe = (_props: any) => {
                 <h1>{recipe.title}</h1>
                 <h2>Ingredients</h2>
                 <ul>
-                    {recipe.ingredients.map(item => (
+                    {recipe.extendedIngredients.map(item => (
                         <li key={item.id}>{item.original}</li>
                     ))}
                 </ul>
