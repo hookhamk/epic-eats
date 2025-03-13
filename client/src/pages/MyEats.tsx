@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import PaginatedList from "../components/PaginatedList";
 import { fetchMyEatsFromDB } from "../api/MyEatsAPI";
 import { Link } from 'react-router-dom';
+import auth from '../utils/auth';
 
 const MyEats = () => {
   const [recipes, setRecipes] = useState<any[]>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const userId = auth.getToken();
+
+  if (!userId) {
+    window.location.replace('/login');
+  }
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -14,7 +20,8 @@ const MyEats = () => {
       setError(false);
 
       try {
-        const data = await fetchMyEatsFromDB();
+        const userId = localStorage.getItem('userId');
+        const data = await fetchMyEatsFromDB(Number(userId));
         setRecipes(data);
       } catch (err) {
         console.error("Failed to retrieve saved recipes:", err);

@@ -24,6 +24,18 @@ class Data {
     return savedRecipes;
   }
 
+  async findOne(user_id: number, eatId: number) {
+    const userEat = await UserEats.findOne({
+      where: {
+        id: eatId,
+        user_id: {
+          [Op.eq]: user_id,
+        },
+      },
+    });
+    return userEat;
+  }
+
   async findByTitle(title: string) {
     return await Recipe.findAll({
       where: {
