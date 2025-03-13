@@ -6,7 +6,7 @@ import auth from '../utils/auth';
 
     try {
       const response = await fetch(`/api/recipe/${userId}/myeats`);
-    
+      console.log(userId)
       if (!response.ok) {
         throw new Error('Failed to fetch saved recipes');
       }

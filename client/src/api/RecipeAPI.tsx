@@ -12,11 +12,11 @@ const RecipeAPI = {
   }) => {
     try {
     const userId = auth.getToken();
-    const response = await fetch(`/api/recipes/${userId}/neweat`, {
+    const response = await fetch(`/api/recipe/${userId}/neweat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+        'Authorization': `Bearer ${userId}`,
       },
       body: JSON.stringify(recipeData),
     });

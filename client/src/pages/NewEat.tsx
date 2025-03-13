@@ -1,5 +1,6 @@
 import { useState, type FormEvent, type ChangeEvent } from 'react';
 import RecipeAPI from '../api/RecipeAPI';
+import auth from '../utils/auth';
 
 interface Recipe {
     title: string;
@@ -58,7 +59,7 @@ const NewEat = () => {
     setSuccess(null);
 
     try {
-      const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
+      const userId = auth.getToken();
       if (!userId) {
         throw new Error('User ID not found in local storage');
       }
