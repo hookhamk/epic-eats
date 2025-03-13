@@ -5,13 +5,7 @@ import auth from '../utils/auth';
   const fetchMyEatsFromDB = async (userId: number) => {
 
     try {
-      const response = await fetch(`/api/recipe/${userId}/myeats`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
-        },
-      });
+      const response = await fetch(`/api/recipe/${userId}/myeats`);
     
       if (!response.ok) {
         throw new Error('Failed to fetch saved recipes');

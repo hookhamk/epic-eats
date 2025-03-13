@@ -58,6 +58,11 @@ const NewEat = () => {
     setSuccess(null);
 
     try {
+      const userId = localStorage.getItem('userId'); // Retrieve user ID from local storage
+      if (!userId) {
+        throw new Error('User ID not found in local storage');
+      }
+      
       await RecipeAPI.createRecipe(recipeData);
       setSuccess('Recipe created successfully!');
       setRecipeData({
