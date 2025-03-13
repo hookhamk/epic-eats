@@ -69,14 +69,14 @@ router.post('/neweat', async (req, res) => {
     const newRecipe = req.body;
     console.log('Saving new recipe:', newRecipe);
 
-    // Save the new recipe to the database
-    const userId = req.body.userId; // Assuming userId is passed in the request body
-    const savedRecipe = await Data.saveRecipe(newRecipe, userId);
+    // Save the recipe
+    const savedRecipe = await Data.saveRecipe(newRecipe);
     res.status(201).json(savedRecipe);
-} catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server Error' });
-}
+
+  } catch (err) {
+    console.error('Error saving recipe:', err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 router.get('/editor', async (_req: Request, res: Response) =>{
