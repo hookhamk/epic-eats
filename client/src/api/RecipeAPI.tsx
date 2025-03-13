@@ -8,7 +8,7 @@ const RecipeAPI = {
     source_url?: string;
     summary?: string;
     instructions: string;
-    ingredients: object[];
+    extendedIngredients: object[];
   }) => {
     try {
       let payload = recipeData;
