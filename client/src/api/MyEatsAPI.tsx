@@ -49,7 +49,7 @@ import { useState, useEffect } from "react";
             source_url: body.source_url || '',
             summary: body.summary || '',
             instructions: body.instructions,
-            ingredients: body.ingredients.map((ing) => ing.original),
+            extendedIngredients: body.extendedIngredients.map((ing) => ing.original),
           }),
         });
 
